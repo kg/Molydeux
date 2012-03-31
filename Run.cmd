@@ -1,0 +1,1 @@
+@win32\moai-untz.exe main.lua
