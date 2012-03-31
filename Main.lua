@@ -15,9 +15,6 @@ function setupGame()
 
     -- Create the main viewport
     local viewport = MOAIViewport.new()
-    viewport:setSize(1024, 768)
-    viewport:setScale(1024, -768)
-    viewport:setOffset(-1, 1)
 
     -- Run the splash
     local thread = MOAIThread.new()

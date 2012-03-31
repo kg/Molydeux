@@ -59,6 +59,10 @@ function Splash.new()
 end
 
 function Splash:run(viewport)
+    viewport:setSize(1024, 768)
+    viewport:setScale(1024, -768)
+    viewport:setOffset(-1, 1)
+    
     self.layer:setViewport(viewport)
     MOAISim.pushRenderPass(self.layer)
     local begin = false

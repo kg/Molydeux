@@ -73,6 +73,9 @@ function HiddenObjectScene:getObjectAtPoint(point)
 end
 
 function HiddenObjectScene:begin(viewport)
+    viewport:setSize(1024, 768)
+    viewport:setScale(1024, -768)
+    viewport:setOffset(-1, 1)
     self.backgroundLayer:setViewport(viewport)
     MOAISim.pushRenderPass(self.backgroundLayer)
 end
