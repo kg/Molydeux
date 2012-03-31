@@ -2,9 +2,22 @@ return {
     background = 'Art/Game/houseMap.png';
     objects = {
         {
+            name = 'Pigeon';
             image = 'Art/Game/pigeon.png';
-            location = {64, 128};
-            size = {32, 32};
+            location = {64, 64};
+            size = {128, 128};
+            onClick = function (scene)
+                MOAILogMgr.log("Pigeon!\r\n")
+            end
+        },
+        {
+            name = 'Sad Man';
+            image = 'Art/Game/businessman01.png';
+            location = {256, 64};
+            size = {128, 128};
+            onClick = function (scene)
+                scene.running = false
+            end
         }
     };
 }
