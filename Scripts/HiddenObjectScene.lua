@@ -25,9 +25,26 @@ function HiddenObjectScene:prepareScene(def)
     -- Create a prop for the background art
     local background = MOAIProp2D.new()
     background:setDeck(backgroundQuad)
-
+    
     -- Add the objects to our layer
     self.backgroundLayer:insertProp(background)
+    
+    -- Walk through the objects in the scene definition and construct them
+    for k, objDef in ipairs(def.objects) do
+        local objQuad = MOAIGfxQuad2D.new()
+        objQuad:setTexture(objDef.image)
+        objQuad:setRect(
+            objDef.location[1], objDef.location[2], 
+            objDef.location[1] + objDef.size[1], 
+            objDef.location[2] + objDef.size[2]
+        )
+        objQuad:setUVRect(0, 0, 1, 1)
+        
+        local obj = MOAIProp2D.new()
+        obj:setDeck(objQuad)
+        
+        self.backgroundLayer:insertProp(obj)
+    end
 end
 
 function HiddenObjectScene:begin(viewport)

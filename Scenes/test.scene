@@ -1,3 +1,10 @@
 return {
-    background = 'Art/Game/houseMap.png'
+    background = 'Art/Game/houseMap.png';
+    objects = {
+        {
+            image = 'Art/Game/pigeon.png';
+            location = {64, 128};
+            size = {32, 32};
+        }
+    };
 }
