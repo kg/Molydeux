@@ -8,9 +8,17 @@ function HiddenObjectScene.new(sceneFile)
     -- Create a layer and add it as a render pass
     Ob.backgroundLayer = MOAILayer2D.new()
     
+    Ob.sceneDefinition = dofile(sceneFile)
+    
+    Ob:prepareScene(Ob.sceneDefinition)
+    
+    return Ob
+end
+
+function HiddenObjectScene:prepareScene(def)
     -- Load the splash image
     local backgroundQuad = MOAIGfxQuad2D.new()
-    backgroundQuad:setTexture('Art/Game/houseMap.png')
+    backgroundQuad:setTexture(def.background)
     backgroundQuad:setRect(0, 0, 1024, 768)
     backgroundQuad:setUVRect(0, 0, 1, 1)
     
@@ -19,11 +27,7 @@ function HiddenObjectScene.new(sceneFile)
     background:setDeck(backgroundQuad)
 
     -- Add the objects to our layer
-    Ob.backgroundLayer:insertProp(background)
-    
-    Ob.sceneDefinition = dofile(sceneFile)
-    
-    return Ob
+    self.backgroundLayer:insertProp(background)
 end
 
 function HiddenObjectScene:begin(viewport)
@@ -37,8 +41,6 @@ function HiddenObjectScene:run(viewport)
     
     while self.running do
         x, y = MOAIInputMgr.device.pointer:getLoc()
-        
-        MOAILogMgr.log(self.sceneDefinition .. "\n")
         
         coroutine.yield()
     end
