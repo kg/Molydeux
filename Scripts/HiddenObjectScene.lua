@@ -1,6 +1,8 @@
 local HiddenObjectScene = {}
 HiddenObjectScene.__index = HiddenObjectScene
 
+Util = require("Scripts.Util")
+Input = require("Scripts.Input")
 Rect = require("Scripts.Rect")
 
 function HiddenObjectScene.new(sceneFile)
@@ -19,14 +21,9 @@ end
 
 function HiddenObjectScene:prepareScene(def)
     -- Load the splash image
-    local backgroundQuad = MOAIGfxQuad2D.new()
-    backgroundQuad:setTexture(def.background)
-    backgroundQuad:setRect(0, 0, 1024, 768)
-    backgroundQuad:setUVRect(0, 0, 1, 1)
-    
-    -- Create a prop for the background art
-    local background = MOAIProp2D.new()
-    background:setDeck(backgroundQuad)
+    local background = Util.makeSimpleProp(
+        def.background, {0, 0}, def.backgroundSize
+    )
     
     -- Add the objects to our layer
     self.backgroundLayer:insertProp(background)
@@ -35,23 +32,9 @@ function HiddenObjectScene:prepareScene(def)
     
     -- Walk through the objects in the scene definition and construct them
     for k, objDef in ipairs(def.objects) do
-        local texture = MOAITexture.new()
-        texture:load(objDef.image)
-        local textureWidth, textureHeight = texture:getSize()
-        
-        local objRect = {
-            objDef.location[1], objDef.location[2], 
-            objDef.location[1] + objDef.size[1], 
-            objDef.location[2] + objDef.size[2]
-        }
-        
-        local objQuad = MOAIGfxQuad2D.new()
-        objQuad:setTexture(texture)
-        objQuad:setRect(unpack(objRect))
-        objQuad:setUVRect(0, 0, 1, 1)
-        
-        local obj = MOAIProp2D.new()
-        obj:setDeck(objQuad)
+        obj, objRect = Util.makeSimpleProp(
+            objDef.image, objDef.location, objDef.size
+        )
         
         self.backgroundLayer:insertProp(obj)
         
@@ -83,15 +66,11 @@ function HiddenObjectScene:run(viewport)
     
     local hoverSize = 0.25
     
+    self.mouseState = Input.getMouseState()
+    
     while self.running do
-        local previousMouseState = self.mouseState or {
-            position = {0, 0};
-            left = false;
-        }
-        self.mouseState = {
-            position = {MOAIInputMgr.device.pointer:getLoc()};
-            left = MOAIInputMgr.device.mouseLeft:isDown();
-        }
+        local previousMouseState = self.mouseState
+        self.mouseState = Input.getMouseState()
         
         local previousHoveringObject = self.hoveringObject
         self.hoveringObject = self:getObjectAtPoint(self.mouseState.position)
