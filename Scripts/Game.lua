@@ -29,10 +29,10 @@ end
 function Game:run(viewport)
     self.backgroundLayer:setViewport(viewport)
     
-    while true do
-        local hos = HiddenObjectScene.new("Scenes/test.scene")
-        hos:run(viewport)
+    local hos = HiddenObjectScene.new("Scenes/test.scene")
+    hos:run(viewport)
     
+    while true do
         MOAISim.pushRenderPass(self.backgroundLayer)
         coroutine.yield()
         MOAISim.popRenderPass(self.backgroundLayer)
