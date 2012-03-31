@@ -4,6 +4,9 @@
     <filename>Scripts\Game.lua</filename>
   </file>
   <file>
+    <filename>Scripts\HiddenObjectScene.lua</filename>
+  </file>
+  <file>
     <filename>Main.lua</filename>
   </file>
 </project>
