@@ -56,16 +56,17 @@ function HiddenObjectScene:prepareScene(def)
         self.backgroundLayer:insertProp(obj)
         
         table.insert(self.objects, {
-            name = objDef.name,
-            prop = obj,
-            rect = objRect
+            name = objDef.name;
+            prop = obj;
+            rect = objRect;
+            onClick = objDef.onClick;
         })
     end
 end
 
 function HiddenObjectScene:getObjectAtPoint(point)
     for i,obj in ipairs(self.objects) do
-        if Rect.isPointInside(obj.rect, {x, y}) then
+        if Rect.isPointInside(obj.rect, point) then
             return obj
         end
     end
@@ -80,19 +81,33 @@ function HiddenObjectScene:run(viewport)
     self:begin(viewport)
     self.running = true
     
+    local hoverSize = 0.25
+    
     while self.running do
-        x, y = MOAIInputMgr.device.pointer:getLoc()
+        local previousMouseState = self.mouseState or {
+            position = {0, 0};
+            left = false;
+        }
+        self.mouseState = {
+            position = {MOAIInputMgr.device.pointer:getLoc()};
+            left = MOAIInputMgr.device.mouseLeft:isDown();
+        }
+        
         local previousHoveringObject = self.hoveringObject
-        self.hoveringObject = self:getObjectAtPoint({x, y})
+        self.hoveringObject = self:getObjectAtPoint(self.mouseState.position)
         
         if not (self.hoveringObject == previousHoveringObject) then
             if previousHoveringObject then
-                previousHoveringObject.prop:moveScl(-0.5, -0.5, 0.25)
+                previousHoveringObject.prop:moveScl(-hoverSize, -hoverSize, 0.2)
             end
             
             if self.hoveringObject then
-                self.hoveringObject.prop:moveScl(0.5, 0.5, 0.25)
+                self.hoveringObject.prop:moveScl(hoverSize, hoverSize, 0.2)
             end
+        end
+        
+        if (self.mouseState.left and not previousMouseState.left) and self.hoveringObject then
+            self.hoveringObject.onClick(self)
         end
         
         coroutine.yield()
