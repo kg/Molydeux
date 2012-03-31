@@ -1,6 +1,8 @@
 local HiddenObjectScene = {}
 HiddenObjectScene.__index = HiddenObjectScene
 
+ShaderUtil = require("Scripts.ShaderUtil")
+
 function HiddenObjectScene.new(sceneFile)
     local Ob = {}
     setmetatable(Ob, HiddenObjectScene)
@@ -31,14 +33,39 @@ function HiddenObjectScene:prepareScene(def)
     
     -- Walk through the objects in the scene definition and construct them
     for k, objDef in ipairs(def.objects) do
+        local texture = MOAITexture.new()
+        texture:load(objDef.image)
+        local textureWidth, textureHeight = texture:getSize()
+        
         local objQuad = MOAIGfxQuad2D.new()
-        objQuad:setTexture(objDef.image)
+        objQuad:setTexture(texture)
         objQuad:setRect(
             objDef.location[1], objDef.location[2], 
             objDef.location[1] + objDef.size[1], 
             objDef.location[2] + objDef.size[2]
         )
         objQuad:setUVRect(0, 0, 1, 1)
+    
+        function initShader (shader)
+            color = MOAIColor.new ()
+            color:setColor ( 0, 0, 0, 1 )
+            
+            shader:reserveUniforms(3)
+            shader:declareUniform(1, "texelWidth", MOAIShader.UNIFORM_FLOAT)
+            shader:declareUniform(2, "texelHeight", MOAIShader.UNIFORM_FLOAT)
+            shader:declareUniform(3, "glowColor", MOAIShader.UNIFORM_COLOR)
+            
+            shader:setAttr(1, 1 / textureWidth * 4)
+            shader:setAttr(2, 1 / textureHeight * 4)
+            shader:setAttr(3, color)
+            
+            shader:setVertexAttribute ( 1, 'position' )
+            shader:setVertexAttribute ( 2, 'uv' )
+        end
+        
+        local blurShader = ShaderUtil.loadShader("Shaders/glow.vsh", "Shaders/glow.fsh", initShader)
+        
+        objQuad:setShader(blurShader)
         
         local obj = MOAIProp2D.new()
         obj:setDeck(objQuad)

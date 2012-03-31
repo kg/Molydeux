@@ -4,7 +4,7 @@ return {
         {
             image = 'Art/Game/pigeon.png';
             location = {64, 128};
-            size = {32, 32};
+            size = {128, 128};
         }
     };
 }
