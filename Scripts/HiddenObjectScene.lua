@@ -21,9 +21,7 @@ function HiddenObjectScene.new(sceneFile)
     -- Add the objects to our layer
     Ob.backgroundLayer:insertProp(background)
     
-    local f = io.open(sceneFile, "r")
-    Ob.sceneDefinition = f:read("*all")
-    f:close()
+    Ob.sceneDefinition = dofile(sceneFile)
     
     return Ob
 end
