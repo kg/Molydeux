@@ -1,5 +1,6 @@
 return {
     background = 'Art/Game/houseMap.png';
+    backgroundSize = {1024, 768};
     objects = {
         {
             name = 'Pigeon';
