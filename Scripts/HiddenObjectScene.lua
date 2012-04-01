@@ -22,7 +22,7 @@ end
 function HiddenObjectScene:prepareScene(def)
     -- Load the splash image
     local background = Util.makeSimpleProp(
-        def.background, {0, 0}, def.backgroundSize
+        def.background, {0, 0}, def.backgroundSize, true
     )
     
     -- Add the objects to our layer
@@ -33,7 +33,7 @@ function HiddenObjectScene:prepareScene(def)
     -- Walk through the objects in the scene definition and construct them
     for k, objDef in ipairs(def.objects) do
         obj, objRect = Util.makeSimpleProp(
-            objDef.image, objDef.location, objDef.size
+            objDef.image, objDef.location, objDef.size, true
         )
         
         self.backgroundLayer:insertProp(obj)
@@ -49,7 +49,7 @@ end
 
 function HiddenObjectScene:getObjectAtPoint(point)
     for i,obj in ipairs(self.objects) do
-        if Rect.isPointInside(obj.rect, point) then
+        if Rect.isPointInside(obj.rect, point, {obj.prop:getLoc()}) then
             return obj
         end
     end
@@ -59,6 +59,7 @@ function HiddenObjectScene:begin(viewport)
     viewport:setSize(1024, 768)
     viewport:setScale(1024, -768)
     viewport:setOffset(-1, 1)
+    
     self.backgroundLayer:setViewport(viewport)
     MOAISim.pushRenderPass(self.backgroundLayer)
 end
