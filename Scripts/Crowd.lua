@@ -1,5 +1,5 @@
 local CROWD_SIZE = 128
-local CROWD_X = -128
+local CROWD_X = -96
 local CROWD_Y = 55
 
 -- percentages
@@ -11,7 +11,7 @@ local CROWD_SPAWN_DELAY_VARIATION = {80, 180}
 local CROWD_STEP_SIZE_X = 24
 local CROWD_STEP_SIZE_Y = 8
 local CROWD_STEP_LENGTH = 0.9
-local CROWD_STEP_DELAY = 0.5
+local CROWD_STEP_DELAY = 0.4
 local CROWD_SPAWN_DELAY = 8
 
 local CrowdManager = {}
