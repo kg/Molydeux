@@ -193,8 +193,10 @@ function Outside:sayLine(actor, line)
         return dialogTextBox
     end
 
-    local dropShadow = makeTextBox('<c:0>' .. line .. '<c>', { 2, -2 })
-    local text = makeTextBox(line, { 0, 0 })
+    -- Highlight = e08779
+    -- Highlight = 8ea6c6
+    local dropShadow = makeTextBox('<c:afbab7>' .. line .. '<c>', { 2, -2 })
+    local text = makeTextBox('<c:7fcc9e>' .. line .. '<c>', { 0, 0 })
     self.dialogLayer:insertProp(dropShadow)
     self.dialogLayer:insertProp(text)
 
