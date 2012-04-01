@@ -1,0 +1,7 @@
+return {
+    sprite = 'Art/Game/businessman02.png';
+    scale = 0.2;
+    location = { 455, 570 };
+    houseLocation = { 143, 578 };
+    scene = 'Scenes/FatGuy.scene';
+}

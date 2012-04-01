@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
   <file>
+    <filename>Dudes\FatGuy.dude</filename>
+  </file>
+  <file>
     <filename>Scripts\Crowd.lua</filename>
   </file>
   <file>

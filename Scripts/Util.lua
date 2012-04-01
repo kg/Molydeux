@@ -38,4 +38,10 @@ function Util.makeSimpleProp(image, location, size, simpleCoordinates)
     return obj, rect
 end
 
+function Util.getDistance(x0, y0, x1, y1)
+    local xDelta = x1 - x0
+    local yDelta = y1 - y0
+    return math.sqrt(xDelta * xDelta + yDelta * yDelta)
+end
+
 return Util
