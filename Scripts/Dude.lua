@@ -65,9 +65,9 @@ function Dude:failure()
     while true do
         local x, y = self.prop:getLoc()
         acceleration = acceleration + graviticConstant
-        y = math.min(self.outside.WORLD_HEIGHT, y - acceleration)
+        y = math.max(0, y - acceleration)
         self.prop:setLoc(x, y)
-        if y == self.outside.WORLD_HEIGHT then
+        if y == 0 then
             break
         end
         coroutine.yield()

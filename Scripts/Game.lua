@@ -11,7 +11,11 @@ function Game.new()
 end
 
 function Game:run(viewport)
-    local outside = Outside.new('Dudes/FatGuy.dude')
+    local dudeFile = 'Dudes/FatGuy.dude'
+    if STARTER_DUDE then
+        dudeFile = STARTER_DUDE
+    end
+    local outside = Outside.new(dudeFile)
     local objectName = nil
     while outside do
         local sceneFile = outside:run(viewport, objectName)

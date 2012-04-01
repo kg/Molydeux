@@ -1,6 +1,6 @@
 local Util = require('Scripts.Util')
 
-local PIGEON_SCALE = 0.15
+local PIGEON_SCALE = 0.25
 local PIGEON_MOVE_PIXELS_PER_SECOND = 300
 
 ----------------------------------------------------------------------
