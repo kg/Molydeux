@@ -1,7 +1,7 @@
 return {
     name = 'Sad Indian Human';
     sprite = 'Art/Game/businessman01_sad.png';
-    sprite = 'Art/Game/businessman01_dead.png';
+    spriteDead = 'Art/Game/businessman01_dead.png';
     scale = 0.2;
     location = { 441, 595 };
     pigeonDialogLocation = { 571, 555 };
@@ -14,12 +14,15 @@ return {
     responses = {
         ['Sunglasses'] = function(dude, pigeon)
             dude:sayLine("My future is so bright I got to, you know the rest. Thanks!")
-            dude:success()
-        end;
-        ['Bollywood Movie'] = function(dude, pigeon)
-            dude:sayLine("I guess what they say is true. If at first you don't succeed, keep waiting tables.")
-            dude:success()
+ dude:success()
+ end;
+  	['Trunks'] = function(dude, pigeon)
+            dude:sayLine("I could go work on my tan.")
+  end;
+    ['Bikini'] = function(dude, pigeon)
+            dude:sayLine("If this is what I have to wear to be a star, forget it.")	
+   dude:failure()
         end;
     };
-    nextDude = 'Dudes/BluetoothGuy.dude';
+    nextDude = nil
 }

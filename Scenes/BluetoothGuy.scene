@@ -1,20 +1,22 @@
 return {
-    background = 'Art/Game/houseMap.png';
+    background = 'Art/Game/room.png';
     backgroundSize = {1024, 768};
     objects = {
         
         {
             name = 'Telephone Call';
-            image = 'Art/Game/telephone.png';
+            description = 'A scrap of paper with a telephone number written on it. I wonder whose it is?';
+            image = 'Art/Game/item_cellphone.png';
             location = {256, 64};
             size = {128, 128};
             onClick = function (scene)
                 scene.running = false
             end
         },
-      {
+        {
             name = 'Newspaper Article';
-            image = 'Art/Game/newspaper.png';
+            description = 'A new study reveals an unprecedented causal link between exposure to pigeons and cancer.";
+            image = 'Art/Game/item_article.png';
             location = {256, 64};
             size = {128, 128};
             onClick = function (scene)

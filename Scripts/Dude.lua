@@ -57,13 +57,15 @@ function Dude:failure()
 
     self.outside.fitter:insertAnchor(self.anchor)
     
-    Util.playSound("Art/Audio/manScreamA", false)
+    local screams = {"Art/Audio/manScreamA", "Art/Audio/manScreamB"}
+    local screamName = screams[math.random(1, #screams)]
+    local screamSound = Util.playSound(screamName, false)
 
     -- Animate the dude jumping
     local rotateAction = self.prop:moveRot(180, 0.5)
     Util.sleep(0.35)
     
-    local graviticConstant = 0.5
+    local graviticConstant = 0.4
     local acceleration = 0
     while true do
         local x, y = self.prop:getLoc()
@@ -78,6 +80,14 @@ function Dude:failure()
     
     rotateAction:stop()
     self.outside:addSplat(self.def.spriteDead, self.def.scale, self.prop:getLoc())
+    if screamSound then
+        screamSound:stop()
+    end
+    
+    local splatNames = {"Art/Audio/Splat", "Art/Audio/SplatSiren"}
+    local splatName = splatNames[math.random(1, #splatNames)]
+    Util.playSound(splatName)
+    
     Util.sleep(3)
 
     self.outside.fitter:removeAnchor(self.anchor)

@@ -33,7 +33,7 @@ function Util.getVarying(value, variation)
     return value * percentage / 100
 end
 
-function Util.makeSimpleProp(image, location, size, simpleCoordinates)
+function Util.makeSimpleProp(image, location, size, simpleCoordinates, shader)
     local texture = TexturePool.get(image)
     
     local rect
@@ -65,6 +65,10 @@ function Util.makeSimpleProp(image, location, size, simpleCoordinates)
     end
     
     objQuad:setRect(unpack(rect))
+    
+    if shader then
+        objQuad:setShader(shader)
+    end
     
     local obj = MOAIProp2D.new()
     obj:setDeck(objQuad)
@@ -103,10 +107,13 @@ function Util.playSound(filename, looping)
     
     if isWindows then
         fullPath = filename .. ".wav"
+        return nil
     else
         fullPath = filename .. ".aiff"
         return nil
     end
+    
+    MOAILogMgr.log("Loading sound '" .. fullPath .. "'...\r\n")
     
     local sound = MOAIUntzSound.new ()
     sound:load(fullPath)

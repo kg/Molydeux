@@ -1,13 +1,13 @@
 return {
-    background = 'Art/Game/houseMap.png';
+    background = 'Art/Game/room.png';
     backgroundSize = {1024, 768};
     objects = {
    
         {
             name = 'Wine';
-            image = 'Art/Game/businessman01_sad.png';
+            image = 'Art/Game/item_wine.png';
+            silouhetteImage = 'Art/Game/item_wine_a.png';
             location = {256, 64};
-            size = {128, 128};
             description = "The finest vintage thirty-seven cents can buy.";
             onClick = function (scene)
                 scene.running = false
@@ -15,9 +15,9 @@ return {
         },
         {
             name = 'Apple';
-            image = 'Art/Game/businessman01_sad.png';
+            image = 'Art/Game/item_apple.png';
+            silouhetteImage = 'Art/Game/item_apple_a.png';
             location = {512, 64};
-            size = {128, 128};
             description = "Artfully preserved by science's latest and greatest chemicals.";
             onClick = function (scene)
                 scene.running = false
@@ -25,9 +25,9 @@ return {
         },
         {
             name = 'Chinese Food';
-            image = 'Art/Game/businessman01_sad.png';
+            image = 'Art/Game/item_takeout.png';
+            silouhetteImage = 'Art/Game/item_takeout_a.png';
             location = {800, 64};
-            size = {128, 128};
             description = "Only 25 percent MSG by volume!";
             onClick = function (scene)
                 scene.running = false

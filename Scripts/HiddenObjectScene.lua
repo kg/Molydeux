@@ -1,6 +1,7 @@
 local HiddenObjectScene = {}
 HiddenObjectScene.__index = HiddenObjectScene
 
+ShaderUtil = require("Scripts.ShaderUtil")
 Util = require("Scripts.Util")
 Input = require("Scripts.Input")
 Rect = require("Scripts.Rect")
@@ -31,18 +32,44 @@ function HiddenObjectScene:prepareScene(def)
     
     self.objects = {}
     
+    local fadeShader = ShaderUtil.loadShader(
+        "Shaders/fade.vsh", "Shaders/fade.fsh", 
+        function (shader)
+            shader:reserveUniforms ( 1 )
+            shader:declareUniform ( 1, 'color', MOAIShader.UNIFORM_COLOR )
+            shader:setAttrLink ( 1, color, MOAIColor.COLOR_TRAIT )
+            
+            shader:setVertexAttribute ( 1, 'position' )
+            shader:setVertexAttribute ( 2, 'uv' )
+            shader:setVertexAttribute ( 3, 'color' )
+        end
+    )
+    
+    local transparent = MOAIColor.new ()
+    transparent:setColor(1,1,1,0)
+    local opaque = MOAIColor.new()
+    opaque:setColor(1, 1, 1, 1)
+    
     -- Walk through the objects in the scene definition and construct them
     for k, objDef in ipairs(def.objects) do
         obj, objRect = Util.makeSimpleProp(
-            objDef.image, objDef.location, objDef.size, true
+            objDef.image, objDef.location, objDef.size, true, fadeShader
+        )
+        silhouetteObj = Util.makeSimpleProp(
+            objDef.silouhetteImage or objDef.image, objDef.location, objDef.size, true, fadeShader
         )
         
+        obj:setColor(transparent)
+        silhouetteObj:setColor(opaque)
+        
         self.backgroundLayer:insertProp(obj)
+        self.backgroundLayer:insertProp(silhouetteObj)
         
         table.insert(self.objects, {
             name = objDef.name;
             description = objDef.description;
             prop = obj;
+            silhouetteProp = silhouetteObj;
             rect = objRect;
             onClick = objDef.onClick;
         })

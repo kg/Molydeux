@@ -1,11 +1,12 @@
 return {
-    background = 'Art/Game/houseMap.png';
+    background = 'Art/Game/room.png';
     backgroundSize = {1024, 768};
     objects = {
         
         {
-            name = 'Green Pixel';
-            image = 'Art/Game/businessman01_sad.png';
+            name = 'item_greenPixel';
+            description = 'This pixel glows a soothing green hue.';
+            image = 'Art/Game/item_greenPixel.png';
             location = {256, 64};
             size = {128, 128};
             onClick = function (scene)

@@ -8,14 +8,16 @@ return {
     dialog = function(dude, pigeon)
         dude:sayLine("Just think about that.")
         dude:sayLine("I am up here and your here in the air.")
-	dude:sayLine("Lately no one has been able to get through to me.")
-	dude:sayLine("Maybe I could get calls down there...")
+	dude:sayLine("But that is not why we are here, today.")
+	dude:sayLine("Right now at this very moment, the spirit of the industry is dying.")
+	dude:sayLine("The game industry was once a place of creativity and innovation.")
+	dude:sayLine("But now its a green cube.")
         pigeon:sayLine("Coo...")
     end;
     scene = 'Scenes/BluetoothGuy.scene';
     responses = {
         ['Green Pixel'] = function(dude, pigeon)
-            dude:sayLine("I have to take this important call, but thanks.")
+            dude:sayLine("Time to start thinking outside of the box")
    dude:success()
  end;
     };

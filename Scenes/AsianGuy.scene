@@ -1,29 +1,32 @@
 return {
-    background = 'Art/Game/houseMap.png';
+    background = 'Art/Game/room.png';
     backgroundSize = {1024, 768};
     objects = {
     
         {
             name = 'Wife Picture';
-            image = 'Art/Game/businessman01_sad.png';
+            description = 'The man posing in this picture is in the peak of health, and the woman looks happy too!';
+            image = 'Art/Game/item_photo.png';
             location = {256, 64};
             size = {128, 128};
             onClick = function (scene)
                 scene.running = false
             end
         },
-{
+        {
             name = 'Toupee';
-            image = 'Art/Game/businessman01_sad.png';
+            description = "I'm not only the president - I'm a pigeon!";
+            image = 'Art/Game/item_toupee.png';
             location = {512, 64};
             size = {128, 128};
             onClick = function (scene)
                 scene.running = false
             end
         },
-{
+        {
             name = 'Karate DVD';
-            image = 'Art/Game/businessman01_sad.png';
+            description = 'You too can have the strength of a tiger in 36 easy steps!';
+            image = 'Art/Game/item_dvd.png';
             location = {512, 64};
             size = {128, 128};
             onClick = function (scene)
