@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
   <file>
-    <filename>Dudes\FatGuy.dude</filename>
+    <filename>Scripts\Crowd.lua</filename>
   </file>
   <file>
-    <filename>Scripts\Crowd.lua</filename>
+    <filename>Scripts\Dude.lua</filename>
+  </file>
+  <file>
+    <filename>Dudes\FatGuy.dude</filename>
   </file>
   <file>
     <filename>Scripts\Game.lua</filename>
@@ -20,6 +23,9 @@
   </file>
   <file>
     <filename>Scripts\Outside.lua</filename>
+  </file>
+  <file>
+    <filename>Scripts\Pigeon.lua</filename>
   </file>
   <file>
     <filename>Scripts\Rect.lua</filename>

@@ -1,5 +1,23 @@
 Util = {}
 
+function Util.makeSpriteProp(image, scale)
+    local texture = MOAITexture.new()
+    texture:load(image)
+    sizeX, sizeY = texture:getSize()
+    
+    local objQuad = MOAIGfxQuad2D.new()
+    objQuad:setTexture(texture)
+    objQuad:setRect(-sizeX / 2, 0, sizeX / 2, sizeY)
+    
+    local prop = MOAIProp2D.new()
+    prop:setDeck(objQuad)
+    if scale then
+        prop:setScl(scale)
+    end
+    
+    return prop
+end
+
 function Util.makeSimpleProp(image, location, size, simpleCoordinates)
     local texture = MOAITexture.new()
     texture:load(image)
@@ -7,6 +25,14 @@ function Util.makeSimpleProp(image, location, size, simpleCoordinates)
     local rect
     local objQuad = MOAIGfxQuad2D.new()
     objQuad:setTexture(texture)
+    
+    if not location then
+        location = { 0, 0 }
+    end
+    
+    if not size then
+        size = { texture:getSize() }
+    end
     
     if simpleCoordinates then
         rect = {

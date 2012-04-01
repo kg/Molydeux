@@ -3,9 +3,6 @@ local Pigeon = require('Scripts.Pigeon')
 local Dude = require('Scripts.Dude')
 local Crowd = require("Scripts.Crowd")
 
-local WORLD_WIDTH  = 3840
-local WORLD_HEIGHT = 1080
-
 local MAX_CAMERA_WIDTH = 1920
 local MAX_CAMERA_HEIGHT = 1080
 
@@ -15,6 +12,8 @@ local MAX_CAMERA_HEIGHT = 1080
 
 local Outside = {}
 Outside.__index = Outside
+Outside.WORLD_WIDTH  = 3840
+Outside.WORLD_HEIGHT = 1080
 
 function Outside.new(dudeFile)
     local Ob = {}
@@ -37,28 +36,22 @@ function Outside.new(dudeFile)
     -- Create a camera fitter
     Ob.fitter = MOAICameraFitter2D.new()
     Ob.fitter:setCamera(Ob.camera)
-    Ob.fitter:setBounds(0, 0, WORLD_WIDTH, WORLD_HEIGHT)
+    Ob.fitter:setBounds(0, 0, Outside.WORLD_WIDTH, Outside.WORLD_HEIGHT)
     --Ob.fitter:setMin(math.min(MAX_CAMERA_WIDTH, MAX_CAMERA_HEIGHT))
     Ob.fitter:setMin(512)
-
-    -- Load the city map
-    local gfxQuad = MOAIGfxQuad2D.new()
-    gfxQuad:setTexture('Art/Game/cityMap.png')
-    gfxQuad:setRect(0, 0, WORLD_WIDTH, WORLD_HEIGHT)
-
-    -- Create a prop for the background art
-    local background = MOAIProp2D.new()
-    background:setDeck(gfxQuad)
+    
+    local background = Util.makeSimpleProp('Art/Game/cityMap.png')
 
     -- Add the objects to our layer
     Ob.backgroundLayer:insertProp(background)
 
     -- Make the pigeon
-    Ob.pigeon = Pigeon.new(Ob.spriteLayer)
+    Ob.pigeon = Pigeon.new(Ob)
+    Ob.spriteLayer:insertProp(Ob.pigeon.prop)
     Ob.fitter:insertAnchor(Ob.pigeon.anchor)
 
     -- Make the dude
-    Ob.dude = Dude.new(dudeFile)
+    Ob.dude = Dude.new(Ob, dudeFile)
     Ob.spriteLayer:insertProp(Ob.dude.prop)
 
     return Ob
@@ -80,6 +73,9 @@ function Outside:checkDudeProximity()
     local dudeX, dudeY = self.dude.prop:getWorldLoc()
     local distance = Util.getDistance(pigeonX, pigeonY, dudeX, dudeY)
     return distance < 128
+end
+
+function Outside:sayLine(prop, line, duration)
 end
 
 function Outside:onMove(x, y)
@@ -144,6 +140,7 @@ function Outside:run(viewport)
         end
         self.pigeon:update()
         if self:checkDudeProximity() then
+            self.dude.def.dialog(self.dude, self.pigeon)
             scene = self.dude.def.scene
             break
         end

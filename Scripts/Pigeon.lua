@@ -1,5 +1,4 @@
-local PIGEON_WIDTH = 64
-local PIGEON_HEIGHT = 64
+local Util = require('Scripts.Util')
 
 local PIGEON_MOVE_PIXELS_PER_SECOND = 300
 
@@ -12,26 +11,20 @@ Pigeon.__index = Pigeon
 Pigeon.xDir = 0
 Pigeon.yDir = 0
 
-function Pigeon.new(layer)
+function Pigeon.new(outside)
     local Ob = {}
     setmetatable(Ob, Pigeon)
 
-    -- Load the sprite
-    local gfxQuad = MOAIGfxQuad2D.new()
-    gfxQuad:setTexture('Art/Game/pigeon.png')
-    gfxQuad:setRect(-PIGEON_WIDTH / 2, 0, PIGEON_WIDTH / 2, PIGEON_HEIGHT)
+    Ob.outside = outside
 
-    -- Create a prop for the pigeon
-    Ob.prop = MOAIProp2D.new()
-    Ob.prop:setDeck(gfxQuad)
+    -- Create our prop
+    Ob.prop = Util.makeSpriteProp('Art/Game/pigeon.png', .2)
     
-    -- Add the objects to our layer
-    layer:insertProp(Ob.prop)
-
     -- Create an anchor for the pigeon
     Ob.anchor = MOAICameraAnchor2D.new()
     Ob.anchor:setParent(Ob.prop)
-    Ob.anchor:setRect(-PIGEON_WIDTH / 2, 0, PIGEON_WIDTH / 2, PIGEON_HEIGHT)
+    local xMin, yMin, _, xMax, yMax = Ob.prop:getBounds()
+    Ob.anchor:setRect(xMin, yMin, xMax, yMax)
 
     return Ob
 end
@@ -48,6 +41,10 @@ function Pigeon:update()
     self.prop:setLoc(x, y)    
     self.xDir = 0
     self.yDir = 0
+end
+
+function Pigeon:sayLine(line, duration)
+    self.outside:sayLine(self.prop, line, duration)
 end
 
 return Pigeon
