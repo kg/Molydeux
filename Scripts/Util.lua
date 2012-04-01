@@ -16,7 +16,8 @@ function Util.makeSpriteProp(image, scale)
     
     local objQuad = MOAIGfxQuad2D.new()
     objQuad:setTexture(texture)
-    objQuad:setRect(-sizeX / 2, 0, sizeX / 2, sizeY)
+    rect = {-sizeX / 2, 0, sizeX / 2, sizeY}
+    objQuad:setRect(unpack(rect))
     
     local prop = MOAIProp2D.new()
     prop:setDeck(objQuad)
@@ -24,7 +25,7 @@ function Util.makeSpriteProp(image, scale)
         prop:setScl(scale)
     end
     
-    return prop
+    return prop, rect, sizeX, sizeY
 end
 
 function Util.getVarying(value, variation)
@@ -69,7 +70,7 @@ function Util.makeSimpleProp(image, location, size, simpleCoordinates)
     obj:setDeck(objQuad)
     obj:setLoc(unpack(location))
     
-    return obj, rect
+    return obj, rect, size[1], size[2]
 end
 
 function Util.getDistance(x0, y0, x1, y1)
