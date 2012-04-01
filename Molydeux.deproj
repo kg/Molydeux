@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
   <file>
+    <filename>Scripts\Cars.lua</filename>
+  </file>
+  <file>
     <filename>Scripts\Crowd.lua</filename>
   </file>
   <file>
@@ -35,6 +38,9 @@
   </file>
   <file>
     <filename>Scripts\Splash.lua</filename>
+  </file>
+  <file>
+    <filename>Scripts\TexturePool.lua</filename>
   </file>
   <file>
     <filename>Scripts\Util.lua</filename>
