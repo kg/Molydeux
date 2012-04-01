@@ -1,12 +1,14 @@
 return {
     name = 'Sad Fat Human';
     sprite = 'Art/Game/businessman02_sad.png';
+    spriteDead = 'Art/Game/businessman02_dead.png';
     scale = 0.2;
     location = { 441, 595 };
     pigeonDialogLocation = { 571, 555 };
     dialog = function(dude, pigeon)
-        dude:sayLine("I've eaten every meal at every fancy restaurant in this city.")
-        dude:sayLine("What's the point of living if there's nothing new and exciting to eat?")
+        dude:sayLine("I have eaten every meal at every fancy restaurant in this city.")
+        dude:sayLine("I can not tell the difference anymore between a 6 courses or 10 courses.")
+	dude:sayLine("What is the point of living if there is nothing new and exciting to eat?")
         pigeon:sayLine("Coo...")
     end;
     scene = 'Scenes/FatGuy.scene';
@@ -21,7 +23,8 @@ return {
             dude:failure()
         end;
         ['Chinese Food'] = function(dude, pigeon)
-            dude:sayLine("I've never experienced this form of cuisine before. Off to the slums!")
+            dude:sayLine("Cheap eats are tasty treats! I've never experienced this form of cuisine before.")
+            dude:sayLine("Off to the slums!")
             dude:success()
         end;
     };
