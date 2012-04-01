@@ -5,8 +5,8 @@ return {
     location = { 441, 595 };
     pigeonDialogLocation = { 571, 555 };
     dialog = function(dude, pigeon)
-        dude:sayLine("I''ve eaten every meal at every fancy restaurant in this city.")
-        dude:sayLine("What''s the point of living if there's nothing new and exciting to eat?")
+        dude:sayLine("I've eaten every meal at every fancy restaurant in this city.")
+        dude:sayLine("What's the point of living if there's nothing new and exciting to eat?")
         pigeon:sayLine("Coo...")
     end;
     scene = 'Scenes/FatGuy.scene';

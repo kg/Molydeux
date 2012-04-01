@@ -26,13 +26,13 @@ function Outside.new(dudeFile)
     -- Load our font
     local font = MOAIFont.new()    
     local charcodes = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .,:;!?()&/-''"
-    font:load('Art/Fonts/Dwarves.ttf')
-    font:preloadGlyphs(charcodes, 32)
+    font:load('Art/Fonts/tahomabd.ttf')
+    font:preloadGlyphs(charcodes, 48)
         
     -- Create the dialog font style
     Ob.dialogStyle = MOAITextStyle.new()
     Ob.dialogStyle:setFont(font)
-    Ob.dialogStyle:setSize(32)
+    Ob.dialogStyle:setSize(48)
 
     -- Create our layers
     Ob.backgroundLayer = MOAILayer2D.new()
