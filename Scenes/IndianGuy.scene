@@ -21,6 +21,15 @@ return {
                 scene.running = false
             end
         },
+{
+            name = 'Bikini';
+            image = 'Art/Game/businessman01_sad.png';
+            location = {512, 64};
+            size = {128, 128};
+            onClick = function (scene)
+                scene.running = false
+            end
+        },
 
     };
 }

@@ -98,12 +98,16 @@ function Util.makeTextBox(line, offset, size, style, parent, yFlip)
 end
 
 function Util.playSound(filename, looping)
-    local sound = MOAIUntzSound.new ()
-    sound:load(filename)
-    sound:setVolume(1)
-    sound:setLooping(looping or false)
-    sound:play()
-    return sound
+    if false then
+        local sound = MOAIUntzSound.new ()
+        sound:load(filename)
+        sound:setVolume(1)
+        sound:setLooping(looping or false)
+        sound:play()
+        return sound
+    else
+        return nil
+    end
 end
 
 return Util

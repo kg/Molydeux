@@ -14,12 +14,12 @@ return {
     responses = {
         ['Sunglasses'] = function(dude, pigeon)
             dude:sayLine("My future is so bright I got to, you know the rest. Thanks!")
- dude:success()
- end;
-  	['Bollywood Movie'] = function(dude, pigeon)
-            dude:sayLine("I guess what they say is true. If at first you don't succeed, keep waiting tables.")	
- dude:success()
+            dude:success()
+        end;
+        ['Bollywood Movie'] = function(dude, pigeon)
+            dude:sayLine("I guess what they say is true. If at first you don't succeed, keep waiting tables.")
+            dude:success()
         end;
     };
-    nextDude = nil
+    nextDude = 'Dudes/BluetoothGuy.dude';
 }

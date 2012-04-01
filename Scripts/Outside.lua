@@ -342,7 +342,7 @@ function Outside:run(viewport, objectName)
         coroutine.yield()
     end
     
-    ambience:stop()
+    -- ambience:stop()
 
     MOAISim.popRenderPass(self.dialogLayer)
     MOAISim.popRenderPass(self.spriteLayer)

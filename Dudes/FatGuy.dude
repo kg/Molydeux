@@ -8,7 +8,7 @@ return {
     dialog = function(dude, pigeon)
         dude:sayLine("I have eaten every meal at every fancy restaurant in this city.")
         dude:sayLine("I can not tell the difference anymore between a 6 courses or 10 courses.")
-	dude:sayLine("What is the point of living if there is nothing new and exciting to eat?")
+        dude:sayLine("What is the point of living if there is nothing new and exciting to eat?")
         pigeon:sayLine("Coo...")
     end;
     scene = 'Scenes/FatGuy.scene';
@@ -28,5 +28,5 @@ return {
             dude:success()
         end;
     };
-    nextDude = 'Dudes/Indian.dude';
+    nextDude = 'Dudes/IndianGuy.dude';
 }

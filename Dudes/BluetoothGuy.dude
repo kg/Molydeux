@@ -5,19 +5,19 @@ return {
     scale = 0.2;
     location = { 441, 595 };
     pigeonDialogLocation = { 571, 555 };
+    scene = 'Scenes/BluetoothGuy.scene';
     dialog = function(dude, pigeon)
         dude:sayLine("I'm not talking to myself.  No really I'm not.")
         dude:sayLine("I come up here to get good reception.")
-	dude:sayLine("Lately no one has been able to get through to me.")
-	dude:sayLine("Maybe I could get calls down there...")
+        dude:sayLine("Lately no one has been able to get through to me.")
+        dude:sayLine("Maybe I could get calls down there...")
         pigeon:sayLine("Coo...")
     end;
-    scene = 'Scenes/BluetoothGuy.scene';
     responses = {
         ['Telephone Call'] = function(dude, pigeon)
             dude:sayLine("I have to take this important call, but thanks.")
-   dude:success()
- end;
+            dude:success()
+        end;
     };
-    nextDude = nil
+    nextDude = 'Dudes/AsianGuy.dude';
 }
