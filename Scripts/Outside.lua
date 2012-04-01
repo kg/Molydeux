@@ -184,8 +184,8 @@ function Outside:sayLine(actor, line)
 
     -- Highlight = e08779
     -- Highlight = 8ea6c6
-    local dropShadow = Util.makeTextBox('<c:afbab7>' .. line .. '<c>', { 2, -2 }, self.dialogStyle, bubble.prop)
-    local text = Util.makeTextBox('<c:7fcc9e>' .. line .. '<c>', { 0, 0 }, self.dialogStyle, bubble.prop)
+    local dropShadow = Util.makeTextBox('<c:afbab7>' .. line .. '<c>', {2, 81-2}, {650, 350-81}, self.dialogStyle, bubble.prop, true)
+    local text = Util.makeTextBox('<c:7fcc9e>' .. line .. '<c>', {0, 81}, {650, 350-81}, self.dialogStyle, bubble.prop, true)
     self.dialogLayer:insertProp(dropShadow)
     self.dialogLayer:insertProp(text)
 

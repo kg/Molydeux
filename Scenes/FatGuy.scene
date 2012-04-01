@@ -28,7 +28,7 @@ return {
             image = 'Art/Game/businessman01_sad.png';
             location = {800, 64};
             size = {128, 128};
-            description = "Only 25% MSG by volume!";
+            description = "Only 25 percent MSG by volume!";
             onClick = function (scene)
                 scene.running = false
             end

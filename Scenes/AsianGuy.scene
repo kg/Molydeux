@@ -3,7 +3,6 @@ return {
     backgroundSize = {1024, 768};
     objects = {
     
-        },
         {
             name = 'Wife Picture';
             image = 'Art/Game/businessman01_sad.png';

@@ -50,14 +50,14 @@ function HiddenObjectScene:prepareScene(def)
     
     -- Load our font
     local font = MOAIFont.new()    
-    local charcodes = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .,:;!?()&/-''"
+    local charcodes = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .,:;!?()&/-'%"
     font:load('Art/Fonts/tahomabd.ttf')
-    font:preloadGlyphs(charcodes, 48)
+    font:preloadGlyphs(charcodes, 24)
         
     -- Create the dialog font style
     self.dialogStyle = MOAITextStyle.new()
     self.dialogStyle:setFont(font)
-    self.dialogStyle:setSize(48)
+    self.dialogStyle:setSize(24)
 end
 
 function HiddenObjectScene:getObjectAtPoint(point)
@@ -89,8 +89,8 @@ function HiddenObjectScene:setTooltip(text)
     end
     
     if text then
-        self.tooltipShadow = Util.makeTextBox('<c:afbab7>' .. text .. '<c>', { 2, -2 }, self.dialogStyle, nil)
-        self.tooltip = Util.makeTextBox('<c:7fcc9e>' .. text .. '<c>', { 0, 0 }, self.dialogStyle, nil)
+        self.tooltipShadow = Util.makeTextBox('<c:000000>' .. text .. '<c>', {2, 2}, {400, 200}, self.dialogStyle, nil, false)
+        self.tooltip = Util.makeTextBox('<c:ffffff>' .. text .. '<c>', {0, 0}, {400, 200}, self.dialogStyle, nil, false)
         
         self.backgroundLayer:insertProp(self.tooltipShadow)
         self.backgroundLayer:insertProp(self.tooltip)
