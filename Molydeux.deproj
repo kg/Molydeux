@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
   <file>
-    <filename>Scripts\Crowd.lua</filename>
-  </file>
-  <file>
     <filename>Scripts\Cars.lua</filename>
   </file>
   <file>
-    <filename>Scripts\Dude.lua</filename>
-  </file>
-  <file>
-    <filename>Dudes\FatGuy.dude</filename>
+    <filename>Scripts\Crowd.lua</filename>
   </file>
   <file>
     <filename>Scripts\Dude.lua</filename>
