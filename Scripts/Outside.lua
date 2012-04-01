@@ -135,7 +135,7 @@ function Outside.new(dudeFile)
     return Ob
 end
 
-function Outside:addSplat(image, x, y, scale)
+function Outside:addSplat(image, scale, x, y)
     local prop = Util.makeSpriteProp(image, scale)
     prop:setLoc(x, y)
     self.background2Layer:insertProp(prop)

@@ -74,7 +74,7 @@ function Dude:failure()
     end
     
     rotateAction:stop()
-    self.outside:addSplat(self.def.spriteDead)
+    self.outside:addSplat(self.def.spriteDead, self.def.scale, self.prop:getLoc())
     Util.sleep(3)
 
     self.outside.fitter:removeAnchor(self.anchor)
