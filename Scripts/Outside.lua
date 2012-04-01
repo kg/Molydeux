@@ -13,7 +13,10 @@ local MAX_CAMERA_HEIGHT = 1080
 -- Outside class
 ----------------------------------------------------------------------
 
-local Outside = {}
+local Outside = {
+    WORLD_WIDTH = WORLD_WIDTH;
+    WORLD_HEIGHT = WORLD_HEIGHT;
+}
 Outside.__index = Outside
 
 function Outside.new(dudeFile)

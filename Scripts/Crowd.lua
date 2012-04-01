@@ -1,4 +1,5 @@
-local CROWD_SIZE = 64
+local CROWD_SIZE = 128
+local CROWD_X = -128
 local CROWD_Y = 55
 
 -- percentages
@@ -51,6 +52,12 @@ function CrowdManager:spawnCrowdMember(now)
     self.layer:insertProp(crowdMember.prop)
 end
 
+function CrowdManager:killCrowdMemberAtIndex(index)
+    local cm = self.crowd[index]
+    table.remove(self.crowd, index)
+    self.layer:removeProp(cm.prop)
+end
+
 function CrowdManager:update()
     local now = MOAISim.getElapsedTime()
     
@@ -58,8 +65,18 @@ function CrowdManager:update()
         self:spawnCrowdMember(now)
     end
     
+    local killList = {}
+    
     for i,cm in ipairs(self.crowd) do
-        cm:update(now)
+        local departThisMortalCoil = cm:update(now)
+        
+        if departThisMortalCoil then
+            table.insert(killList, i)
+        end
+    end
+    
+    for i, killIndex in ipairs(killList) do
+        self:killCrowdMemberAtIndex(killIndex)
     end
 end
 
@@ -74,7 +91,7 @@ end
 
 function CrowdMember:init(template, now)
     self.prop = Util.makeSimpleProp(template.image, {0, 0}, template.size, false)
-    self.prop:setLoc(0, CROWD_Y)
+    self.prop:setLoc(CROWD_X, CROWD_Y)
     self:takeStep(now)
 end
 
@@ -94,9 +111,18 @@ function CrowdMember:takeStep(now)
 end
 
 function CrowdMember:update(now)
+    Outside = require("Scripts.Outside")
+
     if now >= self.nextStepTime then
         self:takeStep(now)
     end
+    
+    x = self.prop:getLoc()
+    if x >= Outside.WORLD_WIDTH then
+        return true
+    end
+    
+    return false
 end
 
 return {
