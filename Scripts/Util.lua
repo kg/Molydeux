@@ -81,8 +81,12 @@ end
 function Util.makeTextBox(line, offset, style, parent)
     local dialogTextBox = MOAITextBox.new()
     dialogTextBox:setString(line)
-    dialogTextBox:setStyle(style)
-    dialogTextBox:setParent(parent)
+    if style then
+        dialogTextBox:setStyle(style)
+    end
+    if parent then
+        dialogTextBox:setParent(parent)
+    end
     dialogTextBox:setRect(0 + offset[1], 81 + offset[2], 650 + offset[1], 350 + offset[2])
     dialogTextBox:setAlignment(MOAITextBox.LEFT_JUSTIFY)
     dialogTextBox:setYFlip(true)
