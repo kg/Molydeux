@@ -1,64 +1,12 @@
+local Util = require('Scripts.Util')
+local Pigeon = require('Scripts.Pigeon')
+local Dude = require('Scripts.Dude')
+
 local WORLD_WIDTH  = 3840
 local WORLD_HEIGHT = 1080
 
 local MAX_CAMERA_WIDTH = 1920
 local MAX_CAMERA_HEIGHT = 1080
-
-local PIGEON_WIDTH = 64
-local PIGEON_HEIGHT = 64
-
-local PIGEON_MOVE_PIXELS_PER_SECOND = 300
-
-----------------------------------------------------------------------
--- Pigeon class
-----------------------------------------------------------------------
-
-local Pigeon = {}
-Pigeon.__index = Pigeon
-Pigeon.xDir = 0
-Pigeon.yDir = 0
-
-function Pigeon.new(layer)
-    local Ob = {}
-    setmetatable(Ob, Pigeon)
-
-    -- Load the sprite
-    local gfxQuad = MOAIGfxQuad2D.new()
-    gfxQuad:setTexture('Art/Game/pigeon.png')
-    gfxQuad:setRect(-PIGEON_WIDTH / 2, 0, PIGEON_WIDTH / 2, PIGEON_HEIGHT)
-
-    -- Create a prop for the pigeon
-    Ob.prop = MOAIProp2D.new()
-    Ob.prop:setDeck(gfxQuad)
-    
-    -- Place the pigeon in a good starting point in the set
-    Ob.prop:setLoc(128, 0)
-
-    -- Add the objects to our layer
-    layer:insertProp(Ob.prop)
-
-    -- Create an anchor for the pigeon
-    Ob.anchor = MOAICameraAnchor2D.new()
-    Ob.anchor:setParent(Ob.prop)
-    Ob.anchor:setRect(-PIGEON_WIDTH / 2, 0, PIGEON_WIDTH / 2, PIGEON_HEIGHT)
-
-    return Ob
-end
-
-function Pigeon:setMoveDir(xDir, yDir)
-    self.xDir = xDir
-    self.yDir = yDir
-end
-
-function Pigeon:update()
-    local x, y = self.prop:getLoc()
-    x = x + PIGEON_MOVE_PIXELS_PER_SECOND * self.xDir * MOAISim.getStep()
-    y = y + PIGEON_MOVE_PIXELS_PER_SECOND * self.yDir * MOAISim.getStep()
-    self.prop:setLoc(x, y)    
-    self.xDir = 0
-    self.yDir = 0
-end
-
 
 ----------------------------------------------------------------------
 -- Outside class
@@ -67,7 +15,7 @@ end
 local Outside = {}
 Outside.__index = Outside
 
-function Outside.new()
+function Outside.new(dudeFile)
     local Ob = {}
     setmetatable(Ob, Outside)
 
@@ -103,6 +51,10 @@ function Outside.new()
     Ob.pigeon = Pigeon.new(Ob.spriteLayer)
     Ob.fitter:insertAnchor(Ob.pigeon.anchor)
 
+    -- Make the dude
+    Ob.dude = Dude.new(dudeFile)
+    Ob.spriteLayer:insertProp(Ob.dude.prop)
+
     return Ob
 end
 
@@ -115,6 +67,13 @@ function Outside:moveToTarget()
     xDir = xDelta / distance
     yDir = yDelta / distance
     self.pigeon:setMoveDir(xDir, yDir)
+end
+
+function Outside:checkDudeProximity()
+    local pigeonX, pigeonY = self.pigeon.prop:getWorldLoc()
+    local dudeX, dudeY = self.dude.prop:getWorldLoc()
+    local distance = Util.getDistance(pigeonX, pigeonY, dudeX, dudeY)
+    return distance < 128
 end
 
 function Outside:onMove(x, y)
@@ -163,16 +122,30 @@ function Outside:run(viewport)
 
     self:registerInputHandlers()
 
+    scene = nil
+
+    -- Initialize the prop
+    self.pigeon.prop:setLoc(128, 0)
+
+    -- Give it a frame so that initial positions can be set
+    coroutine.yield()
+    
     while true do
         if self.pointerDown then
             self:moveToTarget()
         end
         self.pigeon:update()
+        if self:checkDudeProximity() then
+            scene = self.dude.def.scene
+            break
+        end
         coroutine.yield()
     end
 
     MOAISim.popRenderPass(self.spriteLayer)
     MOAISim.popRenderPass(self.backgroundLayer)
+
+    return scene
 
 end
 
