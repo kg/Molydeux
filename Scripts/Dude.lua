@@ -85,7 +85,11 @@ function Dude:respond(objectName, pigeon)
     pigeon:flyTo(self:getWorldLocation(self.def.pigeonDialogLocation))
     pigeon:lookAt(self.prop:getWorldLoc())
     local responseScript = self.def.responses[objectName]
-    responseScript(self, pigeon)
+    if responseScript then
+        responseScript(self, pigeon)
+    else
+        MOAILogMgr.log("Warning: Dude has no responseScript for object " .. objectName .. "\r\n")
+    end
 end
 
 function Dude:sayLine(line, duration)
