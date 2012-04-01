@@ -35,14 +35,18 @@ function Outside.new(dudeFile)
     Ob.dialogStyle:setSize(48)
 
     -- Create our layers
-    Ob.backgroundLayer = MOAILayer2D.new()
+    Ob.background0Layer = MOAILayer2D.new()
+    Ob.background1Layer = MOAILayer2D.new()
+    Ob.background2Layer = MOAILayer2D.new()
     Ob.spriteLayer = MOAILayer2D.new()
     Ob.dialogLayer = MOAILayer2D.new()
 
     -- Create our camera
     Ob.camera = MOAICamera2D.new()
     Ob.camera:setLoc(512, 512)
-    Ob.backgroundLayer:setCamera(Ob.camera)
+    Ob.background0Layer:setCamera(Ob.camera)
+    Ob.background1Layer:setCamera(Ob.camera)
+    Ob.background2Layer:setCamera(Ob.camera)
     Ob.spriteLayer:setCamera(Ob.camera)
     Ob.dialogLayer:setCamera(Ob.camera)
     
@@ -64,8 +68,20 @@ function Outside.new(dudeFile)
     Ob.fitter:setDamper(0.7)
     
     -- Load the background
-    local background = Util.makeSimpleProp('Art/Game/cityMap.png')
-    Ob.backgroundLayer:insertProp(background)
+    local background0 = Util.makeSimpleProp('Art/Game/cityBackground03.png')
+    background0:setScl(0.5)
+    background0:setLoc(-512, 0)
+    Ob.background0Layer:setParallax(0.5, 1)
+    Ob.background0Layer:insertProp(background0)
+
+    local background1 = Util.makeSimpleProp('Art/Game/cityBackground02.png')
+    background1:setScl(0.5)
+    Ob.background1Layer:insertProp(background1)
+    Ob.background1Layer:setParallax(0.7, 1)
+
+    local background2 = Util.makeSimpleProp('Art/Game/cityBackground01.png')
+    background2:setScl(0.5)
+    Ob.background2Layer:insertProp(background2)
 
     -- Make the pigeon
     Ob.pigeon = Pigeon.new(Ob)
@@ -119,7 +135,7 @@ function Outside:setDude(dudeFile)
 end
 
 function Outside:moveToTarget()
-    targetX, targetY = self.backgroundLayer:wndToWorld(self.pointerX, self.pointerY)
+    targetX, targetY = self.background2Layer:wndToWorld(self.pointerX, self.pointerY)
     pigeonX, pigeonY = self.pigeon.prop:getWorldLoc()
     xDelta = targetX - pigeonX
     yDelta = targetY - pigeonY
@@ -272,9 +288,13 @@ function Outside:run(viewport, objectName)
     self.spriteLayer:setViewport(viewport)
     self.crowdLayer:setViewport(viewport)
     self.carLayer:setViewport(viewport)
-    self.backgroundLayer:setViewport(viewport)
+    self.background0Layer:setViewport(viewport)
+    self.background1Layer:setViewport(viewport)
+    self.background2Layer:setViewport(viewport)
     self.dialogLayer:setViewport(viewport)
-    MOAISim.pushRenderPass(self.backgroundLayer)
+    MOAISim.pushRenderPass(self.background0Layer)
+    MOAISim.pushRenderPass(self.background1Layer)
+    MOAISim.pushRenderPass(self.background2Layer)
     MOAISim.pushRenderPass(self.crowdLayer)
     MOAISim.pushRenderPass(self.carLayer)
     MOAISim.pushRenderPass(self.spriteLayer)
@@ -317,7 +337,9 @@ function Outside:run(viewport, objectName)
     MOAISim.popRenderPass(self.spriteLayer)
     MOAISim.popRenderPass(self.carLayer)
     MOAISim.popRenderPass(self.crowdLayer)
-    MOAISim.popRenderPass(self.backgroundLayer)
+    MOAISim.popRenderPass(self.background0Layer)
+    MOAISim.popRenderPass(self.background1Layer)
+    MOAISim.popRenderPass(self.background2Layer)
 
     return scene
 
