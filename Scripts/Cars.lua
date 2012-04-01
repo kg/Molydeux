@@ -88,7 +88,7 @@ end
 function Car:init(template, now)
     Outside = require("Scripts.Outside")
     
-    self.prop = Util.makeSimpleProp(template.image, {0, 0}, template.size, false)
+    self.prop = Util.makeSpriteProp(template.image, template.scale)
     self.prop:setLoc(CAR_X, CAR_Y)
     
     local distance = Outside.WORLD_WIDTH - CAR_X

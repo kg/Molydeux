@@ -198,21 +198,10 @@ function Outside:sayLine(actor, line)
         end
     end
 
-    function makeTextBox(line, offset)
-        local dialogTextBox = MOAITextBox.new()
-        dialogTextBox:setString(line)
-        dialogTextBox:setStyle(self.dialogStyle)
-        dialogTextBox:setParent(bubble.prop)
-        dialogTextBox:setRect(0 + offset[1], 81 + offset[2], 650 + offset[1], 350 + offset[2])
-        dialogTextBox:setAlignment(MOAITextBox.LEFT_JUSTIFY)
-        dialogTextBox:setYFlip(true)
-        return dialogTextBox
-    end
-
     -- Highlight = e08779
     -- Highlight = 8ea6c6
-    local dropShadow = makeTextBox('<c:afbab7>' .. line .. '<c>', { 2, -2 })
-    local text = makeTextBox('<c:7fcc9e>' .. line .. '<c>', { 0, 0 })
+    local dropShadow = Util.makeTextBox('<c:afbab7>' .. line .. '<c>', { 2, -2 }, self.dialogStyle, bubble.prop)
+    local text = Util.makeTextBox('<c:7fcc9e>' .. line .. '<c>', { 0, 0 }, self.dialogStyle, bubble.prop)
     self.dialogLayer:insertProp(dropShadow)
     self.dialogLayer:insertProp(text)
 

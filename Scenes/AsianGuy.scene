@@ -2,33 +2,31 @@ return {
     background = 'Art/Game/houseMap.png';
     backgroundSize = {1024, 768};
     objects = {
-   
+    
+        },
         {
-            name = 'Wine';
+            name = 'Wife Picture';
             image = 'Art/Game/businessman01_sad.png';
             location = {256, 64};
             size = {128, 128};
-            description = "The finest vintage thirty-seven cents can buy.";
             onClick = function (scene)
                 scene.running = false
             end
         },
-        {
-            name = 'Apple';
+{
+            name = 'Toupee';
             image = 'Art/Game/businessman01_sad.png';
             location = {512, 64};
             size = {128, 128};
-            description = "Artfully preserved by science's latest and greatest chemicals.";
             onClick = function (scene)
                 scene.running = false
             end
         },
-        {
-            name = 'Chinese Food';
+{
+            name = 'Karate DVD';
             image = 'Art/Game/businessman01_sad.png';
-            location = {800, 64};
+            location = {512, 64};
             size = {128, 128};
-            description = "Only 25% MSG by volume!";
             onClick = function (scene)
                 scene.running = false
             end

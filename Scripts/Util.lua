@@ -11,8 +11,7 @@ function Util.sleep(time)
 end
 
 function Util.makeSpriteProp(image, scale)
-    local texture = MOAITexture.new()
-    texture:load(image)
+    local texture = TexturePool.get(image)
     local sizeX, sizeY = texture:getSize()
     
     local objQuad = MOAIGfxQuad2D.new()
@@ -77,6 +76,21 @@ function Util.getDistance(x0, y0, x1, y1)
     local xDelta = x1 - x0
     local yDelta = y1 - y0
     return math.sqrt(xDelta * xDelta + yDelta * yDelta)
+end
+
+function Util.makeTextBox(line, offset, style, parent)
+    local dialogTextBox = MOAITextBox.new()
+    dialogTextBox:setString(line)
+    if style then
+        dialogTextBox:setStyle(style)
+    end
+    if parent then
+        dialogTextBox:setParent(parent)
+    end
+    dialogTextBox:setRect(0 + offset[1], 81 + offset[2], 650 + offset[1], 350 + offset[2])
+    dialogTextBox:setAlignment(MOAITextBox.LEFT_JUSTIFY)
+    dialogTextBox:setYFlip(true)
+    return dialogTextBox
 end
 
 return Util

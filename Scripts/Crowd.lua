@@ -90,7 +90,7 @@ function CrowdMember.new(template, now)
 end
 
 function CrowdMember:init(template, now)
-    self.prop = Util.makeSimpleProp(template.image, {0, 0}, template.size, false)
+    self.prop = Util.makeSpriteProp(template.image, template.scale)
     self.prop:setLoc(CROWD_X, CROWD_Y)
     self:takeStep(now)
 end

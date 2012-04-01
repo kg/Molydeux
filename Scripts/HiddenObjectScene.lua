@@ -12,6 +12,7 @@ function HiddenObjectScene.new(sceneFile)
     -- Create a layer and add it as a render pass
     Ob.backgroundLayer = MOAILayer2D.new()
     
+    MOAILogMgr.log("LOADING scene '" .. sceneFile .. "'...\r\n")
     Ob.sceneDefinition = dofile(sceneFile)
     
     Ob:prepareScene(Ob.sceneDefinition)
@@ -40,11 +41,23 @@ function HiddenObjectScene:prepareScene(def)
         
         table.insert(self.objects, {
             name = objDef.name;
+            description = objDef.description;
             prop = obj;
             rect = objRect;
             onClick = objDef.onClick;
         })
     end
+    
+    -- Load our font
+    local font = MOAIFont.new()    
+    local charcodes = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .,:;!?()&/-''"
+    font:load('Art/Fonts/tahomabd.ttf')
+    font:preloadGlyphs(charcodes, 48)
+        
+    -- Create the dialog font style
+    self.dialogStyle = MOAITextStyle.new()
+    self.dialogStyle:setFont(font)
+    self.dialogStyle:setSize(48)
 end
 
 function HiddenObjectScene:getObjectAtPoint(point)
@@ -64,12 +77,32 @@ function HiddenObjectScene:begin(viewport)
     MOAISim.pushRenderPass(self.backgroundLayer)
 end
 
+function HiddenObjectScene:setTooltip(text)
+    if self.tooltipShadow then
+        self.backgroundLayer:removeProp(self.tooltipShadow)
+        self.tooltipShadow = nil
+    end
+
+    if self.tooltip then
+        self.backgroundLayer:removeProp(self.tooltip)
+        self.tooltip = nil
+    end
+    
+    if text then
+        self.tooltipShadow = Util.makeTextBox('<c:afbab7>' .. text .. '<c>', { 2, -2 }, self.dialogStyle, nil)
+        self.tooltip = Util.makeTextBox('<c:7fcc9e>' .. text .. '<c>', { 0, 0 }, self.dialogStyle, nil)
+        
+        self.backgroundLayer:insertProp(self.tooltipShadow)
+        self.backgroundLayer:insertProp(self.tooltip)
+    end
+end
+
 function HiddenObjectScene:run(viewport)
     self:begin(viewport)
     self.running = true
     
     local hoverSize = 0.25
-    
+
     self.mouseState = Input.getMouseState()
     
     while self.running do
@@ -86,6 +119,9 @@ function HiddenObjectScene:run(viewport)
             
             if self.hoveringObject then
                 self.hoveringObject.prop:moveScl(hoverSize, hoverSize, 0.2)
+                self:setTooltip(self.hoveringObject.description)
+            else
+                self:setTooltip(nil)
             end
         end
         
