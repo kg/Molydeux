@@ -2,6 +2,7 @@ local Util = require('Scripts.Util')
 local Pigeon = require('Scripts.Pigeon')
 local Dude = require('Scripts.Dude')
 local Crowd = require("Scripts.Crowd")
+local Cars = require("Scripts.Cars")
 
 local WORLD_WIDTH  = 3840
 local WORLD_HEIGHT = 1080
@@ -36,6 +37,11 @@ function Outside.new(dudeFile)
     Ob.crowdManager = Crowd.CrowdManager.new()
     Ob.crowdLayer = Ob.crowdManager.layer
     Ob.crowdLayer:setCamera(Ob.camera)
+    
+    -- Create the cars
+    Ob.carManager = Cars.CarManager.new()
+    Ob.carLayer = Ob.carManager.layer
+    Ob.carLayer:setCamera(Ob.camera)
 
     -- Create a camera fitter
     Ob.fitter = MOAICameraFitter2D.new()
@@ -122,9 +128,11 @@ function Outside:run(viewport)
     -- Attach our layers to the viewport and add them as render passes
     self.spriteLayer:setViewport(viewport)
     self.crowdLayer:setViewport(viewport)
+    self.carLayer:setViewport(viewport)
     self.backgroundLayer:setViewport(viewport)
     MOAISim.pushRenderPass(self.backgroundLayer)
     MOAISim.pushRenderPass(self.crowdLayer)
+    MOAISim.pushRenderPass(self.carLayer)
     MOAISim.pushRenderPass(self.spriteLayer)
     
     -- Start up the camera fitter
@@ -151,10 +159,12 @@ function Outside:run(viewport)
             break
         end
         self.crowdManager:update()
+        self.carManager:update()
         coroutine.yield()
     end
 
     MOAISim.popRenderPass(self.spriteLayer)
+    MOAISim.popRenderPass(self.carLayer)
     MOAISim.popRenderPass(self.crowdLayer)
     MOAISim.popRenderPass(self.backgroundLayer)
 
