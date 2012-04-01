@@ -19,7 +19,7 @@ return {
             onClick = function (scene)
                 scene.running = false
             end
-        }
+        },
 {
             name = 'Toupee';
             image = 'Art/Game/businessman01.png';
@@ -28,7 +28,7 @@ return {
             onClick = function (scene)
                 scene.running = false
             end
-        }
+        },
 {
             name = 'Karate DVD';
             image = 'Art/Game/businessman01.png';
@@ -37,6 +37,6 @@ return {
             onClick = function (scene)
                 scene.running = false
             end
-        }
+        },
     };
 }

@@ -11,7 +11,7 @@ return {
             onClick = function (scene)
                 scene.running = false
             end
-        }
+        },
 {
             name = 'Bollywood Movie';
             image = 'Art/Game/businessman01.png';
@@ -20,7 +20,7 @@ return {
             onClick = function (scene)
                 scene.running = false
             end
-        }
+        },
 
     };
 }

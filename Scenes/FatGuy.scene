@@ -37,6 +37,6 @@ return {
             onClick = function (scene)
                 scene.running = false
             end
-        }
+        },
     };
 }
