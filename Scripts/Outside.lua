@@ -23,14 +23,28 @@ function Outside.new(dudeFile)
     local Ob = {}
     setmetatable(Ob, Outside)
 
+    -- Load our font
+    local font = MOAIFont.new()    
+    local charcodes = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .,:;!?()&/-''"
+    font:load('Art/Fonts/Dwarves.ttf')
+    font:preloadGlyphs(charcodes, 32)
+        
+    -- Create the dialog font style
+    Ob.dialogStyle = MOAITextStyle.new()
+    Ob.dialogStyle:setFont(font)
+    Ob.dialogStyle:setSize(32)
+
     -- Create our layers
     Ob.backgroundLayer = MOAILayer2D.new()
     Ob.spriteLayer = MOAILayer2D.new()
+    Ob.dialogLayer = MOAILayer2D.new()
 
     -- Create our camera
     Ob.camera = MOAICamera2D.new()
+    Ob.camera:setLoc(512, 512)
     Ob.backgroundLayer:setCamera(Ob.camera)
     Ob.spriteLayer:setCamera(Ob.camera)
+    Ob.dialogLayer:setCamera(Ob.camera)
     
     -- Create the crowd
     Ob.crowdManager = Crowd.CrowdManager.new()
@@ -46,23 +60,51 @@ function Outside.new(dudeFile)
     Ob.fitter = MOAICameraFitter2D.new()
     Ob.fitter:setCamera(Ob.camera)
     Ob.fitter:setBounds(0, 0, Outside.WORLD_WIDTH, Outside.WORLD_HEIGHT)
-    --Ob.fitter:setMin(math.min(MAX_CAMERA_WIDTH, MAX_CAMERA_HEIGHT))
-    Ob.fitter:setMin(512)
+    Ob.fitter:setMin(600)
+    Ob.fitter:setDamper(0.7)
     
+    -- Load the background
     local background = Util.makeSimpleProp('Art/Game/cityMap.png')
-
-    -- Add the objects to our layer
     Ob.backgroundLayer:insertProp(background)
 
     -- Make the pigeon
     Ob.pigeon = Pigeon.new(Ob)
     Ob.spriteLayer:insertProp(Ob.pigeon.prop)
-    Ob.fitter:insertAnchor(Ob.pigeon.anchor)
 
     -- Make the dude
     Ob.dude = Dude.new(Ob, dudeFile)
     Ob.spriteLayer:insertProp(Ob.dude.prop)
 
+    -- Load our speech bubbles
+    function makeBubbleFrame(image, tipX)
+        local texture = MOAITexture.new()
+        texture:load(image)
+        local sizeX, sizeY = texture:getSize()
+
+        local gfxQuad = MOAIGfxQuad2D.new()
+        gfxQuad:setTexture(texture)
+        rect = { -tipX, 0, sizeX - tipX, sizeY }
+        gfxQuad:setRect(unpack(rect))
+
+        local prop = Util.makeSpriteProp(image)
+        prop:setDeck(gfxQuad)
+        prop:setScl(0.5)
+        
+        local anchor = MOAICameraAnchor2D.new()
+        anchor:setParent(prop)
+        anchor:setRect(rect[1] * 0.5, rect[2] * 0.5, rect[3] * 0.5, rect[4] * 0.5)
+        
+        local bubbleFrame = {}
+        bubbleFrame.prop = prop
+        bubbleFrame.anchor = anchor
+        return bubbleFrame
+    end
+    
+    Ob.bubbleFrames = {
+        makeBubbleFrame('Art/Game/bubbleSmall.png', 67),
+        makeBubbleFrame('Art/Game/bubbleTween.png', 86),
+        makeBubbleFrame('Art/Game/bubbleLarge.png', 89),
+    }
     return Ob
 end
 
@@ -84,7 +126,93 @@ function Outside:checkDudeProximity()
     return distance < 128
 end
 
-function Outside:sayLine(prop, line, duration)
+function Outside:interactWithDude()
+    local scene = self.dude:playCutscene(self.pigeon)
+
+    -- Fly the pigeon offscreen
+    self.fitter:removeAnchor(self.pigeon.anchor)
+    local x, y = self.pigeon.prop:getWorldLoc()
+    self.pigeon:flyTo(x + 600, y)
+    
+    return scene
+end
+
+function Outside:sayLine(actor, line)
+
+    -- Render the text into the bubble
+    local bubble = self.bubbleFrames[#self.bubbleFrames]
+
+    -- Place each of the speech bubbles
+    for i, frame in ipairs(self.bubbleFrames) do
+        local xMin, yMin, _, xMax, yMax = actor.prop:getBounds()
+        local xWorld, yWorld = actor.prop:getWorldLoc()
+        frame.prop:setLoc(xWorld, yWorld + yMax * actor.prop:getScl() + 10)
+    end
+
+    -- Anchor the camera to the speaker and the speech bubble
+    if actor ~= self.pigeon then
+        self.fitter.insertAnchor(actor.anchor)
+    end
+    self.fitter:insertAnchor(bubble.anchor)
+
+
+    -- Animate the speech bubble through its frames
+    for i, frame in ipairs(self.bubbleFrames) do
+        self.dialogLayer:insertProp(frame.prop)
+        Util.sleep(0.06)
+        if i ~= #self.bubbleFrames then
+            self.dialogLayer:removeProp(frame.prop)
+        end
+    end
+
+    function makeTextBox(line, offset)
+        local dialogTextBox = MOAITextBox.new()
+        dialogTextBox:setString(line)
+        dialogTextBox:setStyle(self.dialogStyle)
+        dialogTextBox:setParent(bubble.prop)
+        dialogTextBox:setRect(0 + offset[1], 81 + offset[2], 650 + offset[1], 350 + offset[2])
+        dialogTextBox:setAlignment(MOAITextBox.LEFT_JUSTIFY)
+        dialogTextBox:setYFlip(true)
+        return dialogTextBox
+    end
+
+    local dropShadow = makeTextBox('<c:0>' .. line .. '<c>', { 2, -2 })
+    local text = makeTextBox(line, { 0, 0 })
+    self.dialogLayer:insertProp(dropShadow)
+    self.dialogLayer:insertProp(text)
+
+    -- Wait for the spool to complete or for the user to tap through it
+    local textSpool = text:spool()
+    local dropSpool = dropShadow:spool()
+    while textSpool:isBusy() do
+        if MOAIInputMgr.device.mouseLeft:down() then
+            textSpool:stop()
+            dropSpool:stop()
+            text:revealAll()
+            dropShadow:revealAll()
+            while MOAIInputMgr.device.mouseLeft:down() do
+                coroutine.yield()
+            end
+            break
+        end
+        coroutine.yield()
+    end
+    
+    -- Wait for confirmation input from the player
+    while not MOAIInputMgr.device.mouseLeft:down() do
+        coroutine.yield()
+    end
+    
+    -- Remove the last frame of the speech bubble
+    self.dialogLayer:removeProp(dropShadow)
+    self.dialogLayer:removeProp(text)
+    self.dialogLayer:removeProp(bubble.prop)
+    self.fitter:removeAnchor(bubble.anchor)
+    
+    if actor ~= self.pigeon then
+        self.fitter:removeAnchor(actor.anchor)
+    end
+
 end
 
 function Outside:onMove(x, y)
@@ -126,10 +254,12 @@ function Outside:run(viewport)
     self.crowdLayer:setViewport(viewport)
     self.carLayer:setViewport(viewport)
     self.backgroundLayer:setViewport(viewport)
+    self.dialogLayer:setViewport(viewport)
     MOAISim.pushRenderPass(self.backgroundLayer)
     MOAISim.pushRenderPass(self.crowdLayer)
     MOAISim.pushRenderPass(self.carLayer)
     MOAISim.pushRenderPass(self.spriteLayer)
+    MOAISim.pushRenderPass(self.dialogLayer)
     
     -- Start up the camera fitter
     self.fitter:setViewport(viewport)
@@ -141,6 +271,7 @@ function Outside:run(viewport)
 
     -- Initialize the prop
     self.pigeon.prop:setLoc(128, 0)
+    self.fitter:insertAnchor(self.pigeon.anchor)        
 
     -- Give it a frame so that initial positions can be set
     coroutine.yield()
@@ -151,8 +282,7 @@ function Outside:run(viewport)
         end
         self.pigeon:update()
         if self:checkDudeProximity() then
-            self.dude.def.dialog(self.dude, self.pigeon)
-            scene = self.dude.def.scene
+            scene = self:interactWithDude()
             break
         end
         self.crowdManager:update()
@@ -160,6 +290,7 @@ function Outside:run(viewport)
         coroutine.yield()
     end
 
+    MOAISim.popRenderPass(self.dialogLayer)
     MOAISim.popRenderPass(self.spriteLayer)
     MOAISim.popRenderPass(self.carLayer)
     MOAISim.popRenderPass(self.crowdLayer)

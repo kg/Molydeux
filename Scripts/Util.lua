@@ -2,10 +2,18 @@ TexturePool = require("Scripts.TexturePool")
 
 Util = {}
 
+function Util.sleep(time)
+    local elapsed = 0
+    while elapsed < time do
+        coroutine.yield()
+        elapsed = elapsed + MOAISim.getStep()
+    end
+end
+
 function Util.makeSpriteProp(image, scale)
     local texture = MOAITexture.new()
     texture:load(image)
-    sizeX, sizeY = texture:getSize()
+    local sizeX, sizeY = texture:getSize()
     
     local objQuad = MOAIGfxQuad2D.new()
     objQuad:setTexture(texture)

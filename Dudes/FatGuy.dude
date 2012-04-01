@@ -2,12 +2,13 @@ return {
     name = 'Sad Fat Human';
     sprite = 'Art/Game/businessman02.png';
     scale = 0.2;
-    location = { 466, 597 };
+    location = { 441, 595 };
+    pigeonDialogLocation = { 571, 552 };
     houseLocation = { 143, 578 };
     dialog = function(dude, pigeon)
-        dude:sayLine("I've eaten every meal at every fancy restaurant in this city.", 3)
-        dude:sayLine("What's the point of living if there's nothing new and exciting to eat?", 5)
-        pigeon:sayLine("Coo...", 2)
+        dude:sayLine("I''ve eaten every meal at every fancy restaurant in this city.")
+        dude:sayLine("What''s the point of living if there's nothing new and exciting to eat?")
+        pigeon:sayLine("Coo...")
     end;
     scene = 'Scenes/FatGuy.scene';
 }
