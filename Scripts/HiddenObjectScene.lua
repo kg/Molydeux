@@ -45,25 +45,22 @@ function HiddenObjectScene:prepareScene(def)
         end
     )
     
-    local transparent = MOAIColor.new ()
-    transparent:setColor(1,1,1,0)
-    local opaque = MOAIColor.new()
-    opaque:setColor(1, 1, 1, 1)
-    
     -- Walk through the objects in the scene definition and construct them
     for k, objDef in ipairs(def.objects) do
         obj, objRect = Util.makeSimpleProp(
-            objDef.image, objDef.location, objDef.size, true, fadeShader
+            objDef.image, objDef.location, objDef.size, true
         )
         silhouetteObj = Util.makeSimpleProp(
-            objDef.silouhetteImage or objDef.image, objDef.location, objDef.size, true, fadeShader
+            objDef.silouhetteImage or objDef.image, objDef.location, objDef.size, true
         )
         
-        obj:setColor(transparent)
-        silhouetteObj:setColor(opaque)
+        obj:setShader(fadeShader)
+        obj:setColor(1, 1, 1, 0)
+        silhouetteObj:setShader(fadeShader)
+        silhouetteObj:setColor(1, 1, 1, 1)
         
-        self.backgroundLayer:insertProp(obj)
         self.backgroundLayer:insertProp(silhouetteObj)
+        self.backgroundLayer:insertProp(obj)
         
         table.insert(self.objects, {
             name = objDef.name;
@@ -141,11 +138,11 @@ function HiddenObjectScene:run(viewport)
         
         if not (self.hoveringObject == previousHoveringObject) then
             if previousHoveringObject then
-                previousHoveringObject.prop:moveScl(-hoverSize, -hoverSize, 0.2)
+                previousHoveringObject.prop:moveColor(0, 0, 0, -1, 0.2)
             end
             
             if self.hoveringObject then
-                self.hoveringObject.prop:moveScl(hoverSize, hoverSize, 0.2)
+                self.hoveringObject.prop:moveColor(0, 0, 0, 1, 0.2)
                 self:setTooltip(self.hoveringObject.description)
             else
                 self:setTooltip(nil)

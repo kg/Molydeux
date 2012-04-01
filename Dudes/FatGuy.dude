@@ -29,5 +29,5 @@ return {
             dude:failure()
         end;
     };
-    nextDude = nil
+    nextDude = "Dudes/AsianGuy.dude"
 }
