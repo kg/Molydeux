@@ -12,10 +12,11 @@ end
 
 function Game:run(viewport)
     local outside = Outside.new('Dudes/FatGuy.dude')
+    local objectName = nil
     while outside do
-        local sceneFile = outside:run(viewport)
+        local sceneFile = outside:run(viewport, objectName)
         local hos = HiddenObjectScene.new(sceneFile)
-        hos:run(viewport)
+        objectName = hos:run(viewport)
     end
 end
 

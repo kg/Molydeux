@@ -35,8 +35,7 @@ end
 function Dude:playCutscene(pigeon)
 
     -- Fly the pigeon to its cutscene position
-    local targetX, targetY = self:getWorldLocation(self.def.pigeonDialogLocation)
-    pigeon:flyTo(targetX, targetY)
+    pigeon:flyTo(self:getWorldLocation(self.def.pigeonDialogLocation))
     pigeon:lookAt(self.prop:getWorldLoc())
 
     -- Play out the dialog sequence
@@ -44,6 +43,20 @@ function Dude:playCutscene(pigeon)
     
     -- Provide our target scene    
     return self.def.scene
+end
+
+function Dude:success()
+    -- Animate the dude off the ledge
+    local xMin, yMin, _, xMax, yMax = self.prop:getBounds()
+    self.prop:moveLoc(0, -(yMax - yMin), 2)
+    self.outside:setDude(self.def.nextDude)
+end
+
+function Dude:respond(objectName, pigeon)
+    pigeon:flyTo(self:getWorldLocation(self.def.pigeonDialogLocation))
+    pigeon:lookAt(self.prop:getWorldLoc())
+    local responseScript = self.def.responses[objectName]
+    responseScript(self, pigeon)
 end
 
 function Dude:sayLine(line, duration)

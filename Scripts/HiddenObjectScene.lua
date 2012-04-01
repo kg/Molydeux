@@ -90,6 +90,7 @@ function HiddenObjectScene:run(viewport)
         end
         
         if (self.mouseState.left and not previousMouseState.left) and self.hoveringObject then
+            self.lastObject = self.hoveringObject.name
             self.hoveringObject.onClick(self)
         end
         
@@ -97,6 +98,7 @@ function HiddenObjectScene:run(viewport)
     end
     
     self:finish()
+    return self.lastObject
 end
 
 function HiddenObjectScene:finish()

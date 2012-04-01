@@ -3,7 +3,7 @@ return {
     sprite = 'Art/Game/businessman02.png';
     scale = 0.2;
     location = { 441, 595 };
-    pigeonDialogLocation = { 571, 552 };
+    pigeonDialogLocation = { 571, 555 };
     houseLocation = { 143, 578 };
     dialog = function(dude, pigeon)
         dude:sayLine("I''ve eaten every meal at every fancy restaurant in this city.")
@@ -11,4 +11,11 @@ return {
         pigeon:sayLine("Coo...")
     end;
     scene = 'Scenes/FatGuy.scene';
+    responses = {
+        ['Sad Man'] = function(dude, pigeon)
+            dude:sayLine("At least I'm better off than that guy.")
+            dude:success()
+        end;
+    };
+    nextDude = nil
 }

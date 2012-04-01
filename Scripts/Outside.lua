@@ -72,8 +72,7 @@ function Outside.new(dudeFile)
     Ob.spriteLayer:insertProp(Ob.pigeon.prop)
 
     -- Make the dude
-    Ob.dude = Dude.new(Ob, dudeFile)
-    Ob.spriteLayer:insertProp(Ob.dude.prop)
+    Ob:setDude(dudeFile)
 
     -- Load our speech bubbles
     function makeBubbleFrame(image, tipX)
@@ -108,6 +107,17 @@ function Outside.new(dudeFile)
     return Ob
 end
 
+function Outside:setDude(dudeFile)
+    if self.dude then
+        self.spriteLayer:removeProp(self.dude.prop)
+        self.dude = nil
+    end
+    if dudeFile then
+        self.dude = Dude.new(self, dudeFile)
+        self.spriteLayer:insertProp(self.dude.prop)
+    end
+end
+
 function Outside:moveToTarget()
     targetX, targetY = self.backgroundLayer:wndToWorld(self.pointerX, self.pointerY)
     pigeonX, pigeonY = self.pigeon.prop:getWorldLoc()
@@ -135,6 +145,10 @@ function Outside:interactWithDude()
     self.pigeon:flyTo(x + 600, y)
     
     return scene
+end
+
+function Outside:giveObjectToDude(objectName)
+    self.dude:respond(objectName, self.pigeon)
 end
 
 function Outside:sayLine(actor, line)
@@ -242,7 +256,7 @@ function Outside:registerInputHandlers()
     end
 end
 
-function Outside:run(viewport)
+function Outside:run(viewport, objectName)
     
     -- Renormalize the viewport as something that works with the camera fitter
     viewport:setSize(1024, 768)
@@ -270,8 +284,12 @@ function Outside:run(viewport)
     scene = nil
 
     -- Initialize the prop
-    self.pigeon.prop:setLoc(128, 0)
-    self.fitter:insertAnchor(self.pigeon.anchor)        
+    if not objectName then
+        self.pigeon.prop:setLoc(128, 0)
+    else
+        self:giveObjectToDude(objectName)
+    end
+    self.fitter:insertAnchor(self.pigeon.anchor)
 
     -- Give it a frame so that initial positions can be set
     coroutine.yield()
@@ -281,7 +299,7 @@ function Outside:run(viewport)
             self:moveToTarget()
         end
         self.pigeon:update()
-        if self:checkDudeProximity() then
+        if self.dude and self:checkDudeProximity() then
             scene = self:interactWithDude()
             break
         end
