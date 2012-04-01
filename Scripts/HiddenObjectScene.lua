@@ -70,7 +70,19 @@ function HiddenObjectScene:run(viewport)
     
     local hoverSize = 0.25
     
+    -- Load our font
+    local font = MOAIFont.new()    
+    local charcodes = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .,:;!?()&/-''"
+    font:load('Art/Fonts/tahomabd.ttf')
+    font:preloadGlyphs(charcodes, 48)
+        
+    -- Create the dialog font style
+    self.dialogStyle = MOAITextStyle.new()
+    self.dialogStyle:setFont(font)
+    self.dialogStyle:setSize(48)
+
     self.mouseState = Input.getMouseState()
+    self.tooltip = nil
     
     while self.running do
         local previousMouseState = self.mouseState

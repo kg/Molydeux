@@ -78,4 +78,15 @@ function Util.getDistance(x0, y0, x1, y1)
     return math.sqrt(xDelta * xDelta + yDelta * yDelta)
 end
 
+function Util.makeTextBox(line, offset, style, parent)
+    local dialogTextBox = MOAITextBox.new()
+    dialogTextBox:setString(line)
+    dialogTextBox:setStyle(style)
+    dialogTextBox:setParent(parent)
+    dialogTextBox:setRect(0 + offset[1], 81 + offset[2], 650 + offset[1], 350 + offset[2])
+    dialogTextBox:setAlignment(MOAITextBox.LEFT_JUSTIFY)
+    dialogTextBox:setYFlip(true)
+    return dialogTextBox
+end
+
 return Util

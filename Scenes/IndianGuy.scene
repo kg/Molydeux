@@ -5,7 +5,7 @@ return {
         
         {
             name = 'Sunglasses';
-            image = 'Art/Game/businessman01.png';
+            image = 'Art/Game/businessman01_sad.png';
             location = {256, 64};
             size = {128, 128};
             onClick = function (scene)
@@ -14,7 +14,7 @@ return {
         },
 {
             name = 'Bollywood Movie';
-            image = 'Art/Game/businessman01.png';
+            image = 'Art/Game/businessman01_sad.png';
             location = {512, 64};
             size = {128, 128};
             onClick = function (scene)

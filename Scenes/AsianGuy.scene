@@ -2,18 +2,11 @@ return {
     background = 'Art/Game/houseMap.png';
     backgroundSize = {1024, 768};
     objects = {
-        {
-            name = 'Pigeon';
-            image = 'Art/Game/pigeon.png';
-            location = {64, 64};
-            size = {128, 128};
-            onClick = function (scene)
-                MOAILogMgr.log("Pigeon!\r\n")
-            end
+    
         },
         {
             name = 'Wife Picture';
-            image = 'Art/Game/businessman01.png';
+            image = 'Art/Game/businessman01_sad.png';
             location = {256, 64};
             size = {128, 128};
             onClick = function (scene)
@@ -22,7 +15,7 @@ return {
         },
 {
             name = 'Toupee';
-            image = 'Art/Game/businessman01.png';
+            image = 'Art/Game/businessman01_sad.png';
             location = {512, 64};
             size = {128, 128};
             onClick = function (scene)
@@ -31,7 +24,7 @@ return {
         },
 {
             name = 'Karate DVD';
-            image = 'Art/Game/businessman01.png';
+            image = 'Art/Game/businessman01_sad.png';
             location = {512, 64};
             size = {128, 128};
             onClick = function (scene)
