@@ -18,7 +18,7 @@ function Pigeon.new(outside)
     Ob.outside = outside
 
     -- Create our prop
-    Ob.prop = Util.makeSpriteProp('Art/Game/pigeon.png', .2)
+    Ob.prop = Util.makeSpriteProp('Art/Game/pigeon.png', .15)
     
     -- Create an anchor for the pigeon
     Ob.anchor = MOAICameraAnchor2D.new()

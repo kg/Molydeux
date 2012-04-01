@@ -1,3 +1,5 @@
+TexturePool = require("Scripts.TexturePool")
+
 Util = {}
 
 function Util.makeSpriteProp(image, scale)
@@ -18,9 +20,13 @@ function Util.makeSpriteProp(image, scale)
     return prop
 end
 
+function Util.getVarying(value, variation)
+    local percentage = math.random(unpack(variation))
+    return value * percentage / 100
+end
+
 function Util.makeSimpleProp(image, location, size, simpleCoordinates)
-    local texture = MOAITexture.new()
-    texture:load(image)
+    local texture = TexturePool.get(image)
     
     local rect
     local objQuad = MOAIGfxQuad2D.new()
