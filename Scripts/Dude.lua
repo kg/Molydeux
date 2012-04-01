@@ -73,8 +73,8 @@ function Dude:failure()
         coroutine.yield()
     end
     
-    -- Todo: add a splat
     rotateAction:stop()
+    self.outside:addSplat(self.def.spriteDead)
     Util.sleep(3)
 
     self.outside.fitter:removeAnchor(self.anchor)

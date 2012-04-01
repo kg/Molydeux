@@ -1,6 +1,7 @@
 return {
     name = 'Sad Fat Human';
     sprite = 'Art/Game/businessman02_sad.png';
+    spriteDead = 'Art/Game/businessMan02_dead.png';
     scale = 0.2;
     location = { 441, 595 };
     pigeonDialogLocation = { 571, 555 };

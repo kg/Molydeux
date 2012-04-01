@@ -123,6 +123,12 @@ function Outside.new(dudeFile)
     return Ob
 end
 
+function Outside:addSplat(image, x, y, scale)
+    local prop = Util.makeSpriteProp(image, scale)
+    prop:setLoc(x, y)
+    self.background2Layer:insertProp(prop)
+end
+
 function Outside:setDude(dudeFile)
     if self.dude then
         self.spriteLayer:removeProp(self.dude.prop)
