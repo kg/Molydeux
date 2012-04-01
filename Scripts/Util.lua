@@ -98,16 +98,22 @@ function Util.makeTextBox(line, offset, size, style, parent, yFlip)
 end
 
 function Util.playSound(filename, looping)
-    if false then
-        local sound = MOAIUntzSound.new ()
-        sound:load(filename)
-        sound:setVolume(1)
-        sound:setLooping(looping or false)
-        sound:play()
-        return sound
+    local isWindows = not (os.getenv("WINDIR") == nil)
+    local fullPath
+    
+    if isWindows then
+        fullPath = filename .. ".wav"
     else
+        fullPath = filename .. ".aiff"
         return nil
     end
+    
+    local sound = MOAIUntzSound.new ()
+    sound:load(fullPath)
+    sound:setVolume(1)
+    sound:setLooping(looping or false)
+    sound:play()
+    return sound
 end
 
 return Util

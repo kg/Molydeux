@@ -5,13 +5,21 @@ return {
         
         {
             name = 'Telephone Call';
-            image = 'Art/Game/businessman01_sad.png';
+            image = 'Art/Game/telephone.png';
             location = {256, 64};
             size = {128, 128};
             onClick = function (scene)
                 scene.running = false
             end
         },
-
+      {
+            name = 'Newspaper Article';
+            image = 'Art/Game/newspaper.png';
+            location = {256, 64};
+            size = {128, 128};
+            onClick = function (scene)
+                scene.running = false
+            end
+        },
     };
 }

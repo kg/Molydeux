@@ -48,7 +48,7 @@ end
 function Dude:success()
     -- Animate the dude off the ledge
     local xMin, yMin, _, xMax, yMax = self.prop:getBounds()
-    Util.playSound("Art/Audio/WAVAudio/VictoryA.wav", false)
+    Util.playSound("Art/Audio/VictoryA", false)
     MOAIThread.blockOnAction(self.prop:moveLoc(0, -(yMax - yMin), 2))
     self.outside:setDude(self.def.nextDude)
 end
@@ -57,7 +57,7 @@ function Dude:failure()
 
     self.outside.fitter:insertAnchor(self.anchor)
     
-    Util.playSound("Art/Audio/WAVAudio/manScreamA.wav", false)
+    Util.playSound("Art/Audio/manScreamA", false)
 
     -- Animate the dude jumping
     local rotateAction = self.prop:moveRot(180, 0.5)

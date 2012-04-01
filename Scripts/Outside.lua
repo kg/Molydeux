@@ -326,7 +326,7 @@ function Outside:run(viewport, objectName)
     -- Give it a frame so that initial positions can be set
     coroutine.yield()
     
-    local ambience = Util.playSound("Art/Audio/WAVAudio/cityAmbient.wav", true)
+    local ambience = Util.playSound("Art/Audio/cityAmbient", true)
     
     while true do
         if self.pointerDown then

@@ -24,7 +24,7 @@ return {
 {
             name = 'Bikini';
             image = 'Art/Game/businessman01_sad.png';
-            location = {512, 64};
+            location = {700, 64};
             size = {128, 128};
             onClick = function (scene)
                 scene.running = false

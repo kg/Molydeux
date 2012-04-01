@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
   <file>
+    <filename>Dudes\AsianGuy.dude</filename>
+  </file>
+  <file>
     <filename>Scenes\AsianGuy.scene</filename>
+  </file>
+  <file>
+    <filename>Dudes\BluetoothGuy.dude</filename>
+  </file>
+  <file>
+    <filename>Scenes\BluetoothGuy.scene</filename>
   </file>
   <file>
     <filename>Scripts\Cars.lua</filename>
@@ -25,6 +34,9 @@
     <filename>Scripts\HiddenObjectScene.lua</filename>
   </file>
   <file>
+    <filename>Dudes\IndianGuy.dude</filename>
+  </file>
+  <file>
     <filename>Scenes\IndianGuy.scene</filename>
   </file>
   <file>
@@ -35,6 +47,12 @@
   </file>
   <file>
     <filename>Scripts\Outside.lua</filename>
+  </file>
+  <file>
+    <filename>Dudes\PeterGuy.dude</filename>
+  </file>
+  <file>
+    <filename>Scenes\PeterGuy.scene</filename>
   </file>
   <file>
     <filename>Scripts\Pigeon.lua</filename>
