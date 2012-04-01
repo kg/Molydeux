@@ -177,6 +177,7 @@ function Outside:run(viewport)
             self:moveToTarget()
         end
         self.pigeon:update()
+        self.crowdManager:update()
         coroutine.yield()
     end
 
