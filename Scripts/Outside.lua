@@ -137,6 +137,7 @@ function Outside:checkDudeProximity()
 end
 
 function Outside:interactWithDude()
+
     local scene = self.dude:playCutscene(self.pigeon)
 
     -- Fly the pigeon offscreen
@@ -148,7 +149,10 @@ function Outside:interactWithDude()
 end
 
 function Outside:giveObjectToDude(objectName)
+    local dudeAnchor = self.dude.anchor
+    self.fitter:insertAnchor(dudeAnchor)
     self.dude:respond(objectName, self.pigeon)
+    self.fitter:removeAnchor(dudeAnchor)
 end
 
 function Outside:sayLine(actor, line)
@@ -165,10 +169,9 @@ function Outside:sayLine(actor, line)
 
     -- Anchor the camera to the speaker and the speech bubble
     if actor ~= self.pigeon then
-        self.fitter.insertAnchor(actor.anchor)
+        self.fitter:insertAnchor(actor.anchor)
     end
     self.fitter:insertAnchor(bubble.anchor)
-
 
     -- Animate the speech bubble through its frames
     for i, frame in ipairs(self.bubbleFrames) do

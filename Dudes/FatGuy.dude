@@ -4,7 +4,6 @@ return {
     scale = 0.2;
     location = { 441, 595 };
     pigeonDialogLocation = { 571, 555 };
-    houseLocation = { 143, 578 };
     dialog = function(dude, pigeon)
         dude:sayLine("I''ve eaten every meal at every fancy restaurant in this city.")
         dude:sayLine("What''s the point of living if there's nothing new and exciting to eat?")
@@ -14,7 +13,7 @@ return {
     responses = {
         ['Sad Man'] = function(dude, pigeon)
             dude:sayLine("At least I'm better off than that guy.")
-            dude:success()
+            dude:failure()
         end;
     };
     nextDude = nil

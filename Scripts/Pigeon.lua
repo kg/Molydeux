@@ -25,7 +25,8 @@ function Pigeon.new(outside)
     Ob.anchor = MOAICameraAnchor2D.new()
     Ob.anchor:setParent(Ob.prop)
     local xMin, yMin, _, xMax, yMax = Ob.prop:getBounds()
-    Ob.anchor:setRect(xMin, yMin, xMax, yMax)
+    local anchorScale = PIGEON_SCALE * 1.5;
+    Ob.anchor:setRect(xMin * anchorScale, yMin * anchorScale, xMax * anchorScale, yMax * anchorScale)
 
     return Ob
 end
