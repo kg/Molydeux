@@ -45,7 +45,7 @@ function CrowdManager:spawnCrowdMember(now)
     self.lastCrowdSpawn = now
     self.nextCrowdSpawn = now + Util.getVarying(CROWD_SPAWN_DELAY, CROWD_SPAWN_DELAY_VARIATION)
 
-    template = self.crowdTemplates[1]
+    template = self.crowdTemplates[math.random(1, #self.crowdTemplates)]
     crowdMember = CrowdMember.new(template, now)
     
     table.insert(self.crowd, crowdMember)
