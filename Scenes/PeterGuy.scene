@@ -1,0 +1,17 @@
+return {
+    background = 'Art/Game/houseMap.png';
+    backgroundSize = {1024, 768};
+    objects = {
+        
+        {
+            name = 'Green Pixel';
+            image = 'Art/Game/businessman01_sad.png';
+            location = {256, 64};
+            size = {128, 128};
+            onClick = function (scene)
+                scene.running = false
+            end
+        },
+
+    };
+}

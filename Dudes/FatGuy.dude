@@ -11,10 +11,19 @@ return {
     end;
     scene = 'Scenes/FatGuy.scene';
     responses = {
-        ['Sad Man'] = function(dude, pigeon)
-            dude:sayLine("At least I'm better off than that guy.")
+        ['Wine'] = function(dude, pigeon)
+            dude:sayLine("Strawberries, earthy lavender, dark chocolate notes.  The complexity of this wine has given me a lot to think about...")
+            dude:sayLine("To solve this conundrum I need to drink more.  Thank you for this lovely gift and feel free to stop by for a drink anytime.")
+            dude:success()
+        end;
+        ['Apple'] = function(dude, pigeon)
+            dude:sayLine("Hitting the ground from this height would knock a few pounds off.")
             dude:failure()
         end;
+        ['Chinese Food'] = function(dude, pigeon)
+            dude:sayLine("I've never experienced this form of cuisine before. Off to the slums!")
+            dude:success()
+        end;
     };
-    nextDude = nil
+    nextDude = 'Dudes/Indian.dude';
 }

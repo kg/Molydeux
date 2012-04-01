@@ -10,6 +10,8 @@ end
 
 function setupGame()
 
+    MOAIUntzSystem.initialize()
+
     -- Create the window
     MOAISim.openWindow("Promiscuous Pigeon", 1024, 768)
 

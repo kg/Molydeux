@@ -97,4 +97,13 @@ function Util.makeTextBox(line, offset, size, style, parent, yFlip)
     return dialogTextBox
 end
 
+function Util.playSound(filename, looping)
+    local sound = MOAIUntzSound.new ()
+    sound:load(filename)
+    sound:setVolume(1)
+    sound:setLooping(looping or false)
+    sound:play()
+    return sound
+end
+
 return Util

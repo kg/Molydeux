@@ -27,12 +27,12 @@ function Outside.new(dudeFile)
     local font = MOAIFont.new()    
     local charcodes = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .,:;!?()&/-''"
     font:load('Art/Fonts/tahomabd.ttf')
-    font:preloadGlyphs(charcodes, 48)
+    font:preloadGlyphs(charcodes, 40)
         
     -- Create the dialog font style
     Ob.dialogStyle = MOAITextStyle.new()
     Ob.dialogStyle:setFont(font)
-    Ob.dialogStyle:setSize(48)
+    Ob.dialogStyle:setSize(40)
 
     -- Create our layers
     Ob.background0Layer = MOAILayer2D.new()
@@ -320,6 +320,8 @@ function Outside:run(viewport, objectName)
     -- Give it a frame so that initial positions can be set
     coroutine.yield()
     
+    local ambience = Util.playSound("Art/Audio/WAVAudio/cityAmbient.wav", true)
+    
     while true do
         if self.pointerDown then
             self:moveToTarget()
@@ -333,6 +335,8 @@ function Outside:run(viewport, objectName)
         self.carManager:update()
         coroutine.yield()
     end
+    
+    ambience:stop()
 
     MOAISim.popRenderPass(self.dialogLayer)
     MOAISim.popRenderPass(self.spriteLayer)
