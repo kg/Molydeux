@@ -18,6 +18,8 @@ function Game:run(viewport)
     else
         local hos = HiddenObjectScene.new("Scenes/test.scene")
         hos:run(viewport)
+        
+        self.outside:run(viewport)
     end
 end
 

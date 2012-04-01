@@ -4,12 +4,12 @@
     <filename>Scripts\Game.lua</filename>
   </file>
   <file>
+    <filename>Scripts\HiddenObjectScene.lua</filename>
+  </file>
+  <file>
     <filename>Main.lua</filename>
   </file>
   <file>
-    <filename>Scripts\Outside.lua</filename>
-  </file>
-  <file>
-    <filename>Scripts\Splash.lua</filename>
+    <filename>Scenes\test.scene</filename>
   </file>
 </project>
