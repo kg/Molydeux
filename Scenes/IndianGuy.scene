@@ -7,18 +7,8 @@ return {
             name = 'Sunglasses';
             description = "You're not sure that you can deal with these stylish shades.";
             image = 'Art/Game/item_sunglasses.png';
+            silhouetteImage = 'Art/Game/item_sunglasses_a.png';
             location = {256, 64};
-            size = {128, 128};
-            onClick = function (scene)
-                scene.running = false
-            end
-        },
-        {
-            name = 'Trunks';
-            description = 'The tale of an indian actor who heads to Hollywood to become a star.';
-            image = 'Art/Game/swimTrunks.png';
-            location = {512, 64};
-            size = {128, 128};
             onClick = function (scene)
                 scene.running = false
             end
@@ -27,8 +17,8 @@ return {
             name = 'Bikini';
             description = 'Perfect for catching some rays on the beach.';
             image = 'Art/Game/item_bikini.png';
+            silhouetteImage = 'Art/Game/item_bikini_a.png';
             location = {700, 64};
-            size = {128, 128};
             onClick = function (scene)
                 scene.running = false
             end

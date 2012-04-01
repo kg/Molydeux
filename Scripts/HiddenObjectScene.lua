@@ -51,7 +51,7 @@ function HiddenObjectScene:prepareScene(def)
             objDef.image, objDef.location, objDef.size, true
         )
         silhouetteObj = Util.makeSimpleProp(
-            objDef.silouhetteImage or objDef.image, objDef.location, objDef.size, true
+            objDef.silhouetteImage or objDef.image, objDef.location, objDef.size, true
         )
         
         obj:setShader(fadeShader)

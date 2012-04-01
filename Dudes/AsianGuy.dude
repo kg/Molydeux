@@ -26,5 +26,5 @@ return {
             dude:sucess()
         end;
     };
-    nextDude = nil
+    nextDude = "Dudes/IndianGuy.dude"
 }

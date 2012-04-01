@@ -7,8 +7,8 @@ return {
             name = 'Wife Picture';
             description = 'The man posing in this picture is in the peak of health, and the woman looks happy too!';
             image = 'Art/Game/item_photo.png';
+            silhouetteImage = 'Art/Game/item_photo_a.png';
             location = {256, 64};
-            size = {128, 128};
             onClick = function (scene)
                 scene.running = false
             end
@@ -17,8 +17,8 @@ return {
             name = 'Toupee';
             description = "I'm not only the president - I'm a pigeon!";
             image = 'Art/Game/item_toupee.png';
+            silhouetteImage = 'Art/Game/item_toupee_a.png';
             location = {512, 64};
-            size = {128, 128};
             onClick = function (scene)
                 scene.running = false
             end
@@ -27,8 +27,8 @@ return {
             name = 'Karate DVD';
             description = 'You too can have the strength of a tiger in 36 easy steps!';
             image = 'Art/Game/item_dvd.png';
+            silhouetteImage = 'Art/Game/item_dvd_a.png';
             location = {512, 64};
-            size = {128, 128};
             onClick = function (scene)
                 scene.running = false
             end

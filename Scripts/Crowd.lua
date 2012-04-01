@@ -1,6 +1,8 @@
 local CROWD_SIZE = 128
 local CROWD_X = -96
-local CROWD_Y = 55
+local CROWD_Y = 110
+
+local CROWD_PLACEMENT_RANGE = {-64, 64}
 
 -- percentages
 local CROWD_STEP_SIZE_VARIATION = {90, 110}
@@ -41,12 +43,12 @@ function CrowdManager:init()
     self:spawnCrowdMember(now)
 end
 
-function CrowdManager:spawnCrowdMember(now)
+function CrowdManager:spawnCrowdMember(now, pointingAt)
     self.lastCrowdSpawn = now
     self.nextCrowdSpawn = now + Util.getVarying(CROWD_SPAWN_DELAY, CROWD_SPAWN_DELAY_VARIATION)
 
     template = self.crowdTemplates[math.random(1, #self.crowdTemplates)]
-    crowdMember = CrowdMember.new(template, now)
+    crowdMember = CrowdMember.new(template, now, pointingAt)
     
     table.insert(self.crowd, crowdMember)
     self.layer:insertProp(crowdMember.prop)
@@ -80,19 +82,35 @@ function CrowdManager:update()
     end
 end
 
-function CrowdMember.new(template, now)
+function CrowdMember.new(template, now, pointingAt)
     local Ob = {}
     setmetatable(Ob, CrowdMember)
     
-    Ob:init(template, now)
+    Ob:init(template, now, pointingAt)
     
     return Ob
 end
 
-function CrowdMember:init(template, now)
-    self.prop = Util.makeSpriteProp(template.image, template.scale)
-    self.prop:setLoc(CROWD_X, CROWD_Y)
-    self:takeStep(now)
+function CrowdMember:init(template, now, pointingAt)
+    local imageFile
+    if pointingAt then
+        imageFile = template.pointingImage
+    else
+        imageFile = template.image
+    end
+    
+    self.prop = Util.makeSpriteProp(imageFile, template.scale)
+    
+    if pointingAt then
+        self.lastStepTime = 99999999
+        self.nextStepTime = 99999999
+        
+        local x = pointingAt[1] + math.random(CROWD_PLACEMENT_RANGE[1], CROWD_PLACEMENT_RANGE[2])
+        self.prop:setLoc(x, CROWD_Y)
+    else
+        self.prop:setLoc(CROWD_X, CROWD_Y)
+        self:takeStep(now)
+    end
 end
 
 function CrowdMember:takeStep(now)
@@ -115,6 +133,7 @@ function CrowdMember:update(now)
 
     if now >= self.nextStepTime then
         self:takeStep(now)
+        self.prop:setTexture(self.pointingImage)
     end
     
     x = self.prop:getLoc()
