@@ -7,7 +7,25 @@
     <filename>Scripts\HiddenObjectScene.lua</filename>
   </file>
   <file>
+    <filename>Scripts\Input.lua</filename>
+  </file>
+  <file>
     <filename>Main.lua</filename>
+  </file>
+  <file>
+    <filename>Scripts\Outside.lua</filename>
+  </file>
+  <file>
+    <filename>Scripts\Rect.lua</filename>
+  </file>
+  <file>
+    <filename>Scripts\ShaderUtil.lua</filename>
+  </file>
+  <file>
+    <filename>Scripts\Splash.lua</filename>
+  </file>
+  <file>
+    <filename>Scripts\Util.lua</filename>
   </file>
   <file>
     <filename>Scenes\test.scene</filename>
