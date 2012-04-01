@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
   <file>
+    <filename>Scripts\Crowd.lua</filename>
+  </file>
+  <file>
     <filename>Scripts\Game.lua</filename>
   </file>
   <file>
@@ -26,6 +29,9 @@
   </file>
   <file>
     <filename>Scripts\Util.lua</filename>
+  </file>
+  <file>
+    <filename>Crowd\templates.lua</filename>
   </file>
   <file>
     <filename>Scenes\test.scene</filename>

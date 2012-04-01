@@ -1,3 +1,5 @@
+Crowd = require("Scripts.Crowd")
+
 local WORLD_WIDTH  = 3840
 local WORLD_HEIGHT = 1080
 
@@ -79,6 +81,11 @@ function Outside.new()
     Ob.camera = MOAICamera2D.new()
     Ob.backgroundLayer:setCamera(Ob.camera)
     Ob.spriteLayer:setCamera(Ob.camera)
+    
+    -- Create the crowd
+    Ob.crowdManager = Crowd.CrowdManager.new()
+    Ob.crowdLayer = Ob.crowdManager.layer
+    Ob.crowdLayer:setCamera(Ob.camera)
 
     -- Create a camera fitter
     Ob.fitter = MOAICameraFitter2D.new()
@@ -153,8 +160,10 @@ function Outside:run(viewport)
 
     -- Attach our layers to the viewport and add them as render passes
     self.spriteLayer:setViewport(viewport)
+    self.crowdLayer:setViewport(viewport)
     self.backgroundLayer:setViewport(viewport)
     MOAISim.pushRenderPass(self.backgroundLayer)
+    MOAISim.pushRenderPass(self.crowdLayer)
     MOAISim.pushRenderPass(self.spriteLayer)
     
     -- Start up the camera fitter
@@ -172,6 +181,7 @@ function Outside:run(viewport)
     end
 
     MOAISim.popRenderPass(self.spriteLayer)
+    MOAISim.popRenderPass(self.crowdLayer)
     MOAISim.popRenderPass(self.backgroundLayer)
 
 end
