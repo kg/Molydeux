@@ -1,14 +1,14 @@
 return {
     {
         image = "Art/Game/carA.png";
-        size = {128, 128};
+        scale = 0.15;
     },
     {
         image = "Art/Game/busA.png";
-        size = {128, 128};
+        scale = 0.15;
     },
     {
         image = "Art/Game/busB.png";
-        size = {128, 128};
+        scale = 0.3;
     }
 }

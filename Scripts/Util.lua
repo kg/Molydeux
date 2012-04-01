@@ -11,8 +11,7 @@ function Util.sleep(time)
 end
 
 function Util.makeSpriteProp(image, scale)
-    local texture = MOAITexture.new()
-    texture:load(image)
+    local texture = TexturePool.get(image)
     local sizeX, sizeY = texture:getSize()
     
     local objQuad = MOAIGfxQuad2D.new()

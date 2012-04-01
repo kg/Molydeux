@@ -12,7 +12,7 @@ return {
             end
         },
         {
-            name = 'Wine';
+            name = 'Wife Picture';
             image = 'Art/Game/businessman01.png';
             location = {256, 64};
             size = {128, 128};
@@ -21,7 +21,7 @@ return {
             end
         }
 {
-            name = 'Apple';
+            name = 'Toupee';
             image = 'Art/Game/businessman01.png';
             location = {512, 64};
             size = {128, 128};
@@ -30,9 +30,9 @@ return {
             end
         }
 {
-            name = 'Chinese Food';
+            name = 'Karate DVD';
             image = 'Art/Game/businessman01.png';
-            location = {800, 64};
+            location = {512, 64};
             size = {128, 128};
             onClick = function (scene)
                 scene.running = false

@@ -49,6 +49,9 @@
     <filename>Crowd\templates.lua</filename>
   </file>
   <file>
+    <filename>Cars\templates.lua</filename>
+  </file>
+  <file>
     <filename>Scenes\test.scene</filename>
   </file>
 </project>
