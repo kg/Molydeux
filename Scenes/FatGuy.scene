@@ -19,8 +19,8 @@ return {
             onClick = function (scene)
                 scene.running = false
             end
-        }
-{
+        },
+        {
             name = 'Apple';
             image = 'Art/Game/businessman01.png';
             location = {512, 64};
@@ -28,8 +28,8 @@ return {
             onClick = function (scene)
                 scene.running = false
             end
-        }
-{
+        },
+        {
             name = 'Chinese Food';
             image = 'Art/Game/businessman01.png';
             location = {800, 64};

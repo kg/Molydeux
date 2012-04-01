@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project>
   <file>
+    <filename>Scenes\AsianGuy.scene</filename>
+  </file>
+  <file>
     <filename>Scripts\Cars.lua</filename>
   </file>
   <file>
@@ -13,10 +16,16 @@
     <filename>Dudes\FatGuy.dude</filename>
   </file>
   <file>
+    <filename>Scenes\FatGuy.scene</filename>
+  </file>
+  <file>
     <filename>Scripts\Game.lua</filename>
   </file>
   <file>
     <filename>Scripts\HiddenObjectScene.lua</filename>
+  </file>
+  <file>
+    <filename>Scenes\IndianGuy.scene</filename>
   </file>
   <file>
     <filename>Scripts\Input.lua</filename>
