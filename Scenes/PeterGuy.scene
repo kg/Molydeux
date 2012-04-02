@@ -5,7 +5,7 @@ return {
         
         {
             name = 'Green Pixel';
-            description = 'This pixel glows a soothing green hue.';
+            description = 'This pixel glows with a soothing green hue.';
             image = 'Art/Game/item_greenPixel.png';
             silhouetteImage = 'Art/Game/item_greenPixel_a.png';
             location = {148, 166};
