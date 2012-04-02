@@ -3,7 +3,7 @@ return {
     sprite = 'Art/Game/businessman01_sad.png';
     spriteDead = 'Art/Game/businessman01_dead.png';
     scale = 0.2;
-    location = { 441, 595 };
+    location = { 388, 790 };
     pigeonDialogLocation = { 571, 555 };
     dialog = function(dude, pigeon)
         dude:sayLine("I moved to the states hoping to be a real American movie star. No one will hire me...")

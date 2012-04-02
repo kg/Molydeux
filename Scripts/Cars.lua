@@ -1,6 +1,6 @@
 local CARS_SIZE = 8
 local CAR_X = -128
-local CAR_Y = -32
+local CAR_Y = 24
 
 -- percentages
 local CAR_SPAWN_DELAY_VARIATION = {60, 200}

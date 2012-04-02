@@ -3,7 +3,7 @@ return {
     sprite = 'Art/Game/businessman04_sad.png';
     spriteDead = 'Art/Game/businessman04_dead.png';
     scale = 0.2;
-    location = { 441, 595 };
+    location = { 855, 2726 };
     pigeonDialogLocation = { 571, 555 };
     dialog = function(dude, pigeon)
         dude:sayLine("She could cook.  She could clean.  But most importantly she was there for me.")

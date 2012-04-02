@@ -107,10 +107,8 @@ function Util.playSound(filename, looping)
     
     if isWindows then
         fullPath = filename .. ".wav"
-        return nil
     else
         fullPath = filename .. ".aiff"
-        return nil
     end
     
     MOAILogMgr.log("Loading sound '" .. fullPath .. "'...\r\n")
