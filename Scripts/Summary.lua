@@ -9,6 +9,17 @@ function Summary.new()
     local Ob = {}
     setmetatable(Ob, Summary)
 
+    -- Load our font
+    local font = MOAIFont.new()    
+    local charcodes = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 .,:;!?()&/-''"
+    font:load('Art/Fonts/tahomabd.ttf')
+    font:preloadGlyphs(charcodes, 40)
+        
+    -- Create the dialog font style
+    Ob.dialogStyle = MOAITextStyle.new()
+    Ob.dialogStyle:setFont(font)
+    Ob.dialogStyle:setSize(40)
+
     -- Create a layer and add it as a render pass
     Ob.layer = MOAILayer2D.new()
     
@@ -22,9 +33,19 @@ function Summary.new()
     
 end
 
-function Summary:run(viewport)
+function Summary:run(viewport, saved, lost)
     viewport:setSize(1024, 768)
     viewport:setScale(1024, -768)
+
+    local line = 'Saved: ' .. saved .. '/' .. (saved + lost)
+    if saved == 5 then
+        line = 'Saved: the games industry'
+    end
+    
+    local textBox = Util.makeTextBox('<c:0>' .. line .. '<c>', { -200, 0 }, { 1024, 768 }, self.dialogStyle)
+    local textBoxHilight = Util.makeTextBox(line, { -202, -2 }, { 1024, 768 }, self.dialogStyle)
+    self.layer:insertProp(textBox)
+    self.layer:insertProp(textBoxHilight)
     
     self.layer:setViewport(viewport)
     MOAISim.pushRenderPass(self.layer)

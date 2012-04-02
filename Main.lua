@@ -2,10 +2,12 @@ Splash = require('Scripts.Splash')
 Game = require('Scripts.Game')
 
 function mainThread(viewport)
-    local splash = Splash:new()
-    local game = Game:new()
-    splash:run(viewport)
-    game:run(viewport)
+    while true do
+        local splash = Splash:new()
+        local game = Game:new()
+        splash:run(viewport)
+        game:run(viewport)
+    end
 end
 
 function setupGame()

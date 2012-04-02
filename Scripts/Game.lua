@@ -1,5 +1,6 @@
 Outside = require('Scripts.Outside')
 HiddenObjectScene = require('Scripts.HiddenObjectScene')
+Summary = require('Scripts.Summary')
 
 local Game = {}
 Game.__index = Game
@@ -17,11 +18,16 @@ function Game:run(viewport)
     end
     local outside = Outside.new(dudeFile)
     local objectName = nil
-    while outside do
+    while true do
         local sceneFile = outside:run(viewport, objectName)
+        if not sceneFile then
+            break
+        end
         local hos = HiddenObjectScene.new(sceneFile)
         objectName = hos:run(viewport)
     end
+    local summary = Summary.new()
+    summary:run(viewport, outside.saved, outside.lost)
 end
 
 return Game
