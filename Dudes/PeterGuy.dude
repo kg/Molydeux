@@ -1,6 +1,7 @@
 return {
     name = 'Distraught Developer Human';
     sprite = 'Art/Game/businessman05_sad.png';
+    spriteHappy = 'Art/Game/businessman05_happy.png';
     scale = 0.2;
     location = { 1684, 670 };
     scene = 'Scenes/PeterGuy.scene';
@@ -24,7 +25,8 @@ return {
             dude:sayLine("This is nice...")
 		dude:sayLine("But I've seen so many like it before.")
             dude.failedOnce = true
-end;
+
+	end;
     };
     nextDude = nil
 }
