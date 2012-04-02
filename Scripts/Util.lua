@@ -104,7 +104,7 @@ end
 function Util.playSound(filename, looping)
     local fullPath
     
-    fullPath = filename .. ".wav"
+    fullPath = filename .. ".ogg"
     
     MOAILogMgr.log("Loading sound '" .. fullPath .. "'...\r\n")
     
