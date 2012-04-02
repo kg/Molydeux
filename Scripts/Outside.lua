@@ -330,6 +330,9 @@ function Outside:run(viewport, objectName)
         self.pigeon.prop:setLoc(128, 0)
     else
         self:giveObjectToDude(objectName)
+        if not dude then
+            return nil
+        end
     end
     self.fitter:insertAnchor(self.pigeon.anchor)
 
