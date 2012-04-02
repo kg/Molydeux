@@ -29,6 +29,7 @@ copy osx\*.* Release\osx
 mkdir Release\win32
 copy win32\*.* Release\win32
 
+copy README.txt Release\
 copy Main.lua Release\
 copy run.command Release\
 copy Run.cmd Release\
