@@ -60,7 +60,15 @@ function Dude:success()
     Util.playSound("Art/Audio/VictoryA", false)
     self.outside.spriteLayer:removeProp(self.prop)
     self.outside.behindLayer:insertProp(self.prop)
-    MOAIThread.blockOnAction(self.prop:moveLoc(0, -(yMax - yMin), 2))
+    function hop(hopSize, distance)
+        MOAIThread.blockOnAction(self.prop:moveLoc(0, -hopSize, 0.3))
+        MOAIThread.blockOnAction(self.prop:moveLoc(0, hopSize + distance, 0.3))
+    end
+    
+    for i=1,5 do
+        hop(32, -16)
+    end
+    
     self.outside.saved = self.outside.saved + 1
     self.outside:setDude(self.def.nextDude)
 end
