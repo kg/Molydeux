@@ -2,7 +2,7 @@ return {
     name = 'Distraught Developer Human';
     sprite = 'Art/Game/businessman05_sad.png';
     scale = 0.2;
-    location = { 1716, 732 };
+    location = { 1684, 736 };
     scene = 'Scenes/PeterGuy.scene';
     dialog = function(dude, pigeon)
         dude:sayLine("In its beginning, the game industry was one of great creativity and innovation.")

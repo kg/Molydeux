@@ -71,6 +71,8 @@ function CarManager:update()
         end
     end
     
+    table.sort(killList, function(a,b) return a>b end)
+    
     for i, killIndex in ipairs(killList) do
         self:killCarAtIndex(killIndex)
     end
