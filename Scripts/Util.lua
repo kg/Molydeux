@@ -102,14 +102,9 @@ function Util.makeTextBox(line, offset, size, style, parent, yFlip)
 end
 
 function Util.playSound(filename, looping)
-    local isWindows = not (os.getenv("WINDIR") == nil)
     local fullPath
     
-    if isWindows then
-        fullPath = filename .. ".wav"
-    else
-        fullPath = filename .. ".aiff"
-    end
+    fullPath = filename .. ".wav"
     
     MOAILogMgr.log("Loading sound '" .. fullPath .. "'...\r\n")
     

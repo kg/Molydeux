@@ -16,7 +16,7 @@ return {
         ['Sunglasses'] = function(dude, pigeon)
             dude:sayLine("Ah, of course! I must look the part of a movie star to be one!")
             dude:sayLine("My future is so bright, I've gotta...")
-            dude:sayLine("...you know the rest. Thanks!"
+            dude:sayLine("...you know the rest. Thanks!")
             dude:success()
         end;
         ['Bikini'] = function(dude, pigeon)
