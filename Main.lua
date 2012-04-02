@@ -15,7 +15,7 @@ function setupGame()
     MOAIUntzSystem.initialize()
 
     -- Create the window
-    MOAISim.openWindow("Promiscuous Pigeon", 1024, 768)
+    MOAISim.openWindow("Coo.", 1024, 768)
 
     -- Create the main viewport
     local viewport = MOAIViewport.new()
