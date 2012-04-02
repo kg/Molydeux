@@ -8,7 +8,17 @@ return {
             description = 'This pixel glows a soothing green hue.';
             image = 'Art/Game/item_greenPixel.png';
             silhouetteImage = 'Art/Game/item_greenPixel_a.png';
-            location = {256, 64};
+            location = {148, 166};
+            onClick = function (scene)
+                scene.running = false
+            end
+        },
+ {
+            name = 'item_greenPixel';
+            description = 'A pixel like all the others...';
+            image = 'Art/Game/item_pixel.png';
+            silhouetteImage = 'Art/Game/item_pixel_a.png';
+            location = {148, 166};
             onClick = function (scene)
                 scene.running = false
             end

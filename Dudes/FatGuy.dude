@@ -27,7 +27,7 @@ return {
             dude:success()
         end;
         ['Apple'] = function(dude, pigeon)
-            dude:sayLine("An apple? Maybe I should go on a diet…")
+            dude:sayLine("An apple? Maybe I should go on a diet...")
             dude:sayLine("Hitting the ground from this height would knock a few pounds off.")
             dude:failure()
         end;

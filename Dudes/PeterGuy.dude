@@ -3,7 +3,7 @@ return {
     sprite = 'Art/Game/businessman05_sad.png';
     scale = 0.2;
     location = { 1716, 732 };
-    scene = 'Scenes/BluetoothGuy.scene';
+    scene = 'Scenes/PeterGuy.scene';
     dialog = function(dude, pigeon)
         dude:sayLine("In its beginning, the game industry was one of great creativity and innovation.")
         dude:sayLine("Art and technology were used to create such wonderful experiences")

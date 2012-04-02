@@ -102,7 +102,8 @@ function Dude:failure()
     if screamSound then
         screamSound:stop()
     end
-    
+    self.prop:setScl(0, 0)
+
     local splatNames = {"Art/Audio/SplatSiren"}
     local splatName = splatNames[math.random(1, #splatNames)]
     Util.playSound(splatName)
