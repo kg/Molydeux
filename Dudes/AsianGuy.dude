@@ -23,7 +23,7 @@ return {
             dude:sayLine("Perhaps there is still hope for finding happiness!")
             dude:success()
         end;
-        [' Karate DVD'] = function(dude, pigeon)
+        ['Karate DVD'] = function(dude, pigeon)
             dude:sayLine("Oh, what a fantastic film.")
             dude:sayLine("If Chow Yun-Fat doesn't need hair to be cool, neither do I! I need to get back in the game!")
             dude:success()
