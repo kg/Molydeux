@@ -1,5 +1,7 @@
 local Util = require('Scripts.Util')
 
+local PIGEON_X_OFFSET = 128;
+
 local Dude = {}
 Dude.__index = Dude
 
@@ -16,7 +18,10 @@ function Dude.new(outside, dudeFile)
     Ob.prop = Util.makeSpriteProp(Ob.def.sprite, Ob.def.scale)
 
     -- Convert the pixel location in the world to a world-space position    
-    Ob.prop:setLoc(Ob:getWorldLocation(Ob.def.location))
+    local location = Ob.def.location
+    location[1] = location[1] / 2
+    location[2] = location[2] / 2
+    Ob.prop:setLoc(Ob:getWorldLocation(location))
     
     -- Create an anchor for the dude
     Ob.anchor = MOAICameraAnchor2D.new()
@@ -35,7 +40,10 @@ end
 function Dude:playCutscene(pigeon)
 
     -- Fly the pigeon to its cutscene position
-    pigeon:flyTo(self:getWorldLocation(self.def.pigeonDialogLocation))
+    local location = {unpack(self.def.location)}
+    location[1] = location[1] + PIGEON_X_OFFSET
+    
+    pigeon:flyTo(self:getWorldLocation(location))
     pigeon:lookAt(self.prop:getWorldLoc())
 
     -- Play out the dialog sequence
@@ -95,7 +103,10 @@ function Dude:failure()
 end
 
 function Dude:respond(objectName, pigeon)
-    pigeon:flyTo(self:getWorldLocation(self.def.pigeonDialogLocation))
+    local location = {unpack(self.def.location)}
+    location[1] = location[1] + PIGEON_X_OFFSET
+
+    pigeon:flyTo(self:getWorldLocation(location))
     pigeon:lookAt(self.prop:getWorldLoc())
     local responseScript = self.def.responses[objectName]
     if responseScript then
