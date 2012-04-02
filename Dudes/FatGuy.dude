@@ -1,6 +1,7 @@
 return {
     name = 'Sad Obese Human';
     sprite = 'Art/Game/businessman02_sad.png';
+    spriteHappy = 'Art/Game/businessman02_happy.png';
     spriteDead = 'Art/Game/businessman02_dead.png';
     scale = 0.2;
     location = { 840, 1028 };
