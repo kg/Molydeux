@@ -335,7 +335,7 @@ function Outside:run(viewport, objectName)
         self.pigeon.prop:setLoc(128, 0)
     else
         self:giveObjectToDude(objectName)
-        if not dude then
+        if not self.dude then
             return nil
         end
     end
