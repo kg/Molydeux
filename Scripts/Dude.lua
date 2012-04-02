@@ -58,6 +58,7 @@ function Dude:success()
     local xMin, yMin, _, xMax, yMax = self.prop:getBounds()
     Util.playSound("Art/Audio/VictoryA", false)
     MOAIThread.blockOnAction(self.prop:moveLoc(0, -(yMax - yMin), 2))
+    self.outside.saved = self.outside.saved + 1
     self.outside:setDude(self.def.nextDude)
 end
 
@@ -96,8 +97,9 @@ function Dude:failure()
     local splatName = splatNames[math.random(1, #splatNames)]
     Util.playSound(splatName)
     
-    Util.sleep(3)
+    Util.sleep(1)
 
+    self.outside.lost = self.outside.lost + 1
     self.outside.fitter:removeAnchor(self.anchor)
     self.outside:setDude(self.def.nextDude)
 end
