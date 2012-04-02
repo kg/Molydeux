@@ -1,19 +1,25 @@
 local CROWD_SIZE = 128
+local POINTING_CROWD_SIZE = 5
 local CROWD_X = -96
 local CROWD_Y = 110
 
-local CROWD_PLACEMENT_RANGE = {-64, 64}
+local CROWD_PLACEMENT_RANGE = {20, 110}
 
 -- percentages
 local CROWD_STEP_SIZE_VARIATION = {90, 110}
 local CROWD_STEP_DELAY_VARIATION = {60, 130}
 local CROWD_SPAWN_DELAY_VARIATION = {80, 180}
+local CROWD_HOP_SIZE_VARIATION = {90, 110}
+local CROWD_HOP_DELAY_VARIATION = {70, 120}
 
 -- constants, multiplied by variations
 local CROWD_STEP_SIZE_X = 24
 local CROWD_STEP_SIZE_Y = 8
 local CROWD_STEP_LENGTH = 0.9
 local CROWD_STEP_DELAY = 0.4
+local CROWD_HOP_SIZE_Y = 14
+local CROWD_HOP_LENGTH = 0.6
+local CROWD_HOP_DELAY = 0.2
 local CROWD_SPAWN_DELAY = 8
 
 local CrowdManager = {}
@@ -36,6 +42,7 @@ function CrowdManager:init()
     self.crowdTemplates = dofile("Crowd/templates.lua")
     
     self.crowd = {}
+    self.pointingCrowd = {}
     
     self.layer = MOAILayer2D.new()
     
@@ -44,7 +51,23 @@ function CrowdManager:init()
 end
 
 function CrowdManager:setDude(dude)
+    local now = MOAISim.getElapsedTime()
+    
+    for i,cm in ipairs(self.pointingCrowd) do
+        self.layer:removeProp(cm.prop)
+    end
+    
     self.dude = dude
+    
+    self.pointingCrowd = {}
+    
+    for i=1,POINTING_CROWD_SIZE do
+        template = self.crowdTemplates[math.random(1, #self.crowdTemplates)]
+        crowdMember = CrowdMember.new(template, now, self.dude)
+    
+        table.insert(self.pointingCrowd, crowdMember)
+        self.layer:insertProp(crowdMember.prop)
+    end
 end
 
 function CrowdManager:spawnCrowdMember(now)
@@ -82,6 +105,10 @@ function CrowdManager:update()
         end
     end
     
+    for i,cm in ipairs(self.pointingCrowd) do
+        cm:update(now)
+    end
+    
     for i, killIndex in ipairs(killList) do
         self:killCrowdMemberAtIndex(killIndex)
     end
@@ -105,13 +132,23 @@ function CrowdMember:init(template, now, pointingAt)
     end
     
     self.prop = Util.makeSpriteProp(imageFile, template.scale)
+    self.pointingAt = pointingAt
     
     if pointingAt then
-        self.lastStepTime = 99999999
-        self.nextStepTime = 99999999
+        local x = pointingAt.def.location[1]
         
-        local x = pointingAt[1] + math.random(CROWD_PLACEMENT_RANGE[1], CROWD_PLACEMENT_RANGE[2])
-        self.prop:setLoc(x, CROWD_Y)
+        local randomX = math.random(CROWD_PLACEMENT_RANGE[1], CROWD_PLACEMENT_RANGE[2])
+        if (math.random() >= 0.5) then
+            randomX = -randomX
+        end
+        
+        self.prop:setLoc(x + randomX, CROWD_Y)
+        
+        if randomX > 0 then
+            self.prop:setScl(-1 * template.scale, template.scale)
+        end
+        
+        self:hop(now)
     else
         self.prop:setLoc(CROWD_X, CROWD_Y)
         self:takeStep(now)
@@ -133,12 +170,28 @@ function CrowdMember:takeStep(now)
     end)
 end
 
+function CrowdMember:hop(now)
+    local stepLength = CROWD_HOP_LENGTH
+    local stepDelay = Util.getVarying(CROWD_HOP_DELAY, CROWD_HOP_DELAY_VARIATION)
+    local stepSizeY = Util.getVarying(CROWD_HOP_SIZE_Y, CROWD_HOP_SIZE_VARIATION)
+
+    self.lastStepTime = now
+    self.nextStepTime = now + stepLength + stepDelay
+    local hopUp = self.prop:moveLoc(0, stepSizeY, stepLength / 2)
+    hopUp:setListener(MOAIAction.EVENT_STOP, function ()
+        self.prop:moveLoc(0, -stepSizeY, stepLength / 2)
+    end)
+end
+
 function CrowdMember:update(now)
     Outside = require("Scripts.Outside")
 
     if now >= self.nextStepTime then
-        self:takeStep(now)
-        self.prop:setTexture(self.pointingImage)
+        if self.pointingAt then
+            self:hop(now)
+        else
+            self:takeStep(now)
+        end
     end
     
     x = self.prop:getLoc()

@@ -8,7 +8,7 @@ return {
             description = 'A scrap of paper with a telephone number written on it. I wonder whose it is?';
             image = 'Art/Game/item_cellphone.png';
             silhouetteImage = 'Art/Game/item_cellphone_a.png';
-            location = {256, 64};
+            location = {286, 422};
             onClick = function (scene)
                 scene.running = false
             end
@@ -18,7 +18,7 @@ return {
             description = 'A new study reveals an unprecedented causal link between exposure to pigeons and cancer.';
             image = 'Art/Game/item_article.png';
             silhouetteImage = 'Art/Game/item_article_a.png';
-            location = {256, 64};
+            location = {660, 106};
             onClick = function (scene)
                 scene.running = false
             end

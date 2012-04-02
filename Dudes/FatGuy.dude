@@ -1,29 +1,33 @@
 return {
-    name = 'Sad Fat Human';
+    name = 'Sad Obese Human';
     sprite = 'Art/Game/businessman02_sad.png';
     spriteDead = 'Art/Game/businessman02_dead.png';
     scale = 0.2;
-    location = { 368, 789 };
+    location = { 840, 1028 };
     dialog = function(dude, pigeon)
-        dude:sayLine("I have eaten every meal at every fancy restaurant in this city.")
-        dude:sayLine("I can not tell the difference anymore between a 6 courses or 10 courses.")
-	dude:sayLine("What is the point of living if there is nothing new and exciting to eat?")
+        dude:sayLine("I've eaten the best food this city has to offer.")
+        dude:sayLine("I find no longer find joy in eating, and thus find no joy in life.")
+        dude:sayLine("What is the point of living if there is nothing new and exciting to eat?")
         pigeon:sayLine("Coo...")
     end;
     scene = 'Scenes/FatGuy.scene';
     responses = {
         ['Wine'] = function(dude, pigeon)
-            dude:sayLine("Strawberries, earthy lavender, dark chocolate notes.")
-	dude:sayLine("The complexity of this wine has given me a lot to think about.")
-		dude:sayLine("To solve this conundrum I need to drink more.")
- dude:success()
- end;
-  	['Chinese Food'] = function(dude, pigeon)
-            dude:sayLine("Cheap eats are tasty treats! I have never experience this form of cuisine before.")
-	dude:sayLine("Off to the slums I am.")	
- dude:success()
- end;
-	['Apple'] = function(dude, pigeon)
+            dude:sayLine("Strawberries...")
+            dude:sayLine("earthy lavender...")
+            dude:sayLine("dark chocolate notes...")
+            dude:sayLine("The complexity of this wine has given me a lot to think about.")
+            dude:sayLine("This is a whole new world for me to explore! Thank you!")
+            dude:success()
+        end;
+        ['Chinese Food'] = function(dude, pigeon)
+            dude:sayLine("Never have I had such a dish!")
+            dude:sayLine("A life of 5-star extravagance has caused me to miss on these inexpensive treasures!")
+            dude:sayLine("Off to the slums, I am!")
+            dude:success()
+        end;
+        ['Apple'] = function(dude, pigeon)
+            dude:sayLine("An apple? Maybe I should go on a diet…")
             dude:sayLine("Hitting the ground from this height would knock a few pounds off.")
             dude:failure()
         end;

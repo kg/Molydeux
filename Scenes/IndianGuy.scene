@@ -8,7 +8,7 @@ return {
             description = "You're not sure that you can deal with these stylish shades.";
             image = 'Art/Game/item_sunglasses.png';
             silhouetteImage = 'Art/Game/item_sunglasses_a.png';
-            location = {812, 450};
+            location = {520, 600};
             onClick = function (scene)
                 scene.running = false
             end
@@ -18,7 +18,7 @@ return {
             description = 'Perfect for catching some rays on the beach.';
             image = 'Art/Game/item_bikini.png';
             silhouetteImage = 'Art/Game/item_bikini_a.png';
-            location = {400, 185};
+            location = {394, 250};
             onClick = function (scene)
                 scene.running = false
             end

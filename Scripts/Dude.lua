@@ -1,6 +1,7 @@
 local Util = require('Scripts.Util')
 
 local PIGEON_X_OFFSET = 128;
+local FALL_END_Y = 32;
 
 local Dude = {}
 Dude.__index = Dude
@@ -57,12 +58,13 @@ function Dude:success()
     -- Animate the dude off the ledge
     local xMin, yMin, _, xMax, yMax = self.prop:getBounds()
     Util.playSound("Art/Audio/VictoryA", false)
+    self.outside.spriteLayer:removeProp(self.prop)
+    self.outside.behindLayer:insertProp(self.prop)
     MOAIThread.blockOnAction(self.prop:moveLoc(0, -(yMax - yMin), 2))
     self.outside:setDude(self.def.nextDude)
 end
 
 function Dude:failure()
-
     self.outside.fitter:insertAnchor(self.anchor)
     
     local screams = {"Art/Audio/manScreamA", "Art/Audio/manScreamB"}
@@ -80,7 +82,7 @@ function Dude:failure()
         acceleration = acceleration + graviticConstant
         y = math.max(0, y - acceleration)
         self.prop:setLoc(x, y)
-        if y == 0 then
+        if y <= FALL_END_Y then
             break
         end
         coroutine.yield()
