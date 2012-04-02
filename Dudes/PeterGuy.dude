@@ -18,6 +18,9 @@ return {
             dude:sayLine("It's time to start thinking outside of the box.")
             dude:success()
         end;
+	['Pixel'] = function(dude, pigeon)
+            dude:sayLine("This is nice...")
+		dude:sayLine("But I've seen so many like it before.")
     };
     nextDude = nil
 }
