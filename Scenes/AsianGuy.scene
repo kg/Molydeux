@@ -8,7 +8,7 @@ return {
             description = 'The man posing in this picture is in the peak of health, and the woman looks happy too!';
             image = 'Art/Game/item_photo.png';
             silhouetteImage = 'Art/Game/item_photo_a.png';
-            location = {256, 64};
+            location = {650, 94};
             onClick = function (scene)
                 scene.running = false
             end
@@ -18,7 +18,7 @@ return {
             description = "I'm not only the president - I'm a pigeon!";
             image = 'Art/Game/item_toupee.png';
             silhouetteImage = 'Art/Game/item_toupee_a.png';
-            location = {512, 64};
+            location = {540, 600};
             onClick = function (scene)
                 scene.running = false
             end
@@ -28,7 +28,7 @@ return {
             description = 'You too can have the strength of a tiger in 36 easy steps!';
             image = 'Art/Game/item_dvd.png';
             silhouetteImage = 'Art/Game/item_dvd_a.png';
-            location = {512, 64};
+            location = {400, 344};
             onClick = function (scene)
                 scene.running = false
             end

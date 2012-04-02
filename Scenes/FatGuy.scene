@@ -7,7 +7,7 @@ return {
             name = 'Wine';
             image = 'Art/Game/item_wine.png';
             silhouetteImage = 'Art/Game/item_wine_a.png';
-            location = {256, 64};
+            location = {406, 350};
             description = "The finest vintage thirty-seven cents can buy.";
             onClick = function (scene)
                 scene.running = false
@@ -17,7 +17,7 @@ return {
             name = 'Apple';
             image = 'Art/Game/item_apple.png';
             silhouetteImage = 'Art/Game/item_apple_a.png';
-            location = {512, 64};
+            location = {795, 615};
             description = "Artfully preserved by science's latest and greatest chemicals.";
             onClick = function (scene)
                 scene.running = false
@@ -27,7 +27,7 @@ return {
             name = 'Chinese Food';
             image = 'Art/Game/item_takeout.png';
             silhouetteImage = 'Art/Game/item_takeout_a.png';
-            location = {800, 64};
+            location = {284, 444};
             description = "Only 25 percent MSG by volume!";
             onClick = function (scene)
                 scene.running = false

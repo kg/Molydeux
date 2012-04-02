@@ -50,8 +50,8 @@ function Util.makeSimpleProp(image, location, size, simpleCoordinates, shader)
     
     if simpleCoordinates then
         rect = {
-            0, 0, 
-            size[1], size[2]
+            -size[1] / 2, -size[2] /2, 
+            size[1] / 2, size[2] / 2
         }
         
         objQuad:setUVRect(0, 0, 1, 1)

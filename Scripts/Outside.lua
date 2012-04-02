@@ -146,10 +146,13 @@ function Outside:setDude(dudeFile)
         self.spriteLayer:removeProp(self.dude.prop)
         self.dude = nil
     end
+    
     if dudeFile then
         self.dude = Dude.new(self, dudeFile)
         self.spriteLayer:insertProp(self.dude.prop)
     end
+    
+    self.crowdManager:setDude(self.dude)
 end
 
 function Outside:moveToTarget()

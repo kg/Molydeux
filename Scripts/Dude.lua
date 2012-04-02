@@ -92,7 +92,7 @@ function Dude:failure()
         screamSound:stop()
     end
     
-    local splatNames = {"Art/Audio/Splat", "Art/Audio/SplatSiren"}
+    local splatNames = {"Art/Audio/SplatSiren"}
     local splatName = splatNames[math.random(1, #splatNames)]
     Util.playSound(splatName)
     

@@ -43,12 +43,17 @@ function CrowdManager:init()
     self:spawnCrowdMember(now)
 end
 
-function CrowdManager:spawnCrowdMember(now, pointingAt)
+function CrowdManager:setDude(dude)
+    self.dude = dude
+end
+
+function CrowdManager:spawnCrowdMember(now)
     self.lastCrowdSpawn = now
     self.nextCrowdSpawn = now + Util.getVarying(CROWD_SPAWN_DELAY, CROWD_SPAWN_DELAY_VARIATION)
 
     template = self.crowdTemplates[math.random(1, #self.crowdTemplates)]
-    crowdMember = CrowdMember.new(template, now, pointingAt)
+    
+    crowdMember = CrowdMember.new(template, now, nil)
     
     table.insert(self.crowd, crowdMember)
     self.layer:insertProp(crowdMember.prop)

@@ -24,7 +24,7 @@ end
 function HiddenObjectScene:prepareScene(def)
     -- Load the splash image
     local background = Util.makeSimpleProp(
-        def.background, {0, 0}, def.backgroundSize, true
+        def.background, {1024 / 2, 768 / 2}, def.backgroundSize, true
     )
     
     -- Add the objects to our layer
