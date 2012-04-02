@@ -5,10 +5,12 @@ return {
     location = { 1684, 670 };
     scene = 'Scenes/PeterGuy.scene';
     dialog = function(dude, pigeon)
-        dude:sayLine("In its beginning, the game industry was one of great creativity and innovation.")
-        dude:sayLine("Art and technology were used to create such wonderful experiences")
-        dude:sayLine("But it has come to a creative standstill.")
-        dude:sayLine("The spirit of the industry is dying.")
+        if not dude.failedOnce then 
+	        dude:sayLine("In its beginning, the game industry was one of great creativity and innovation.")
+        	dude:sayLine("Art and technology were used to create such wonderful experiences")
+	        dude:sayLine("But it has come to a creative standstill.")
+       		dude:sayLine("The spirit of the industry is dying.")
+	end
         dude:sayLine("I yearn for something...")
         dude:sayLine("Unique!")
         pigeon:sayLine("Coo...")
@@ -21,6 +23,8 @@ return {
 	['Pixel'] = function(dude, pigeon)
             dude:sayLine("This is nice...")
 		dude:sayLine("But I've seen so many like it before.")
+            dude.failedOnce = true
+end;
     };
     nextDude = nil
 }
