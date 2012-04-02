@@ -113,8 +113,8 @@ function HiddenObjectScene:setTooltip(text)
     end
     
     if text then
-        self.tooltipShadow = Util.makeTextBox('<c:000000>' .. text .. '<c>', {22, 22}, {300, 300}, self.dialogStyle, nil, false)
-        self.tooltip = Util.makeTextBox('<c:ffffff>' .. text .. '<c>', {20, 20}, {300, 300}, self.dialogStyle, nil, false)
+        self.tooltipShadow = Util.makeTextBox('<c:000000>' .. text .. '<c>', {52, 52}, {400, 400}, self.dialogStyle, nil, false)
+        self.tooltip = Util.makeTextBox('<c:ffffff>' .. text .. '<c>', {50, 50}, {400, 400}, self.dialogStyle, nil, false)
         
         self.backgroundLayer:insertProp(self.tooltipShadow)
         self.backgroundLayer:insertProp(self.tooltip)

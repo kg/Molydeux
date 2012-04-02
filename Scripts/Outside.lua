@@ -40,6 +40,7 @@ function Outside.new(dudeFile)
     Ob.background0Layer = MOAILayer2D.new()
     Ob.background1Layer = MOAILayer2D.new()
     Ob.background2Layer = MOAILayer2D.new()
+    Ob.behindLayer = MOAILayer2D.new()
     Ob.spriteLayer = MOAILayer2D.new()
     Ob.dialogLayer = MOAILayer2D.new()
 
@@ -49,6 +50,7 @@ function Outside.new(dudeFile)
     Ob.background0Layer:setCamera(Ob.camera)
     Ob.background1Layer:setCamera(Ob.camera)
     Ob.background2Layer:setCamera(Ob.camera)
+    Ob.behindLayer:setCamera(Ob.camera)
     Ob.spriteLayer:setCamera(Ob.camera)
     Ob.dialogLayer:setCamera(Ob.camera)
     
@@ -145,6 +147,7 @@ end
 
 function Outside:setDude(dudeFile)
     if self.dude then
+        self.behindLayer:removeProp(self.dude.prop)
         self.spriteLayer:removeProp(self.dude.prop)
         self.dude = nil
     end
@@ -302,6 +305,7 @@ function Outside:run(viewport, objectName)
     viewport:setOffset(0, 0)
 
     -- Attach our layers to the viewport and add them as render passes
+    self.behindLayer:setViewport(viewport)
     self.spriteLayer:setViewport(viewport)
     self.crowdLayer:setViewport(viewport)
     self.carLayer:setViewport(viewport)
@@ -311,6 +315,7 @@ function Outside:run(viewport, objectName)
     self.dialogLayer:setViewport(viewport)
     MOAISim.pushRenderPass(self.background0Layer)
     MOAISim.pushRenderPass(self.background1Layer)
+    MOAISim.pushRenderPass(self.behindLayer)
     MOAISim.pushRenderPass(self.background2Layer)
     MOAISim.pushRenderPass(self.crowdLayer)
     MOAISim.pushRenderPass(self.carLayer)
@@ -362,6 +367,7 @@ function Outside:run(viewport, objectName)
     MOAISim.popRenderPass(self.carLayer)
     MOAISim.popRenderPass(self.crowdLayer)
     MOAISim.popRenderPass(self.background0Layer)
+    MOAISim.popRenderPass(self.behindLayer)
     MOAISim.popRenderPass(self.background1Layer)
     MOAISim.popRenderPass(self.background2Layer)
 

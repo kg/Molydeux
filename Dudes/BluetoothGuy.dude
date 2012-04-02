@@ -1,28 +1,33 @@
 return {
-    name = 'Sad Asian Human';
+    name = 'Depressed Electronic Human';
     sprite = 'Art/Game/businessman03_sad.png';
     spriteDead = 'Art/Game/businessman03_dead.png';
     scale = 0.2;
-    location = { 441, 595 };
-    pigeonDialogLocation = { 571, 555 };
+    location = { 3560, 668 };
+    pigeonDialogLocation = { 3508, 576 };
     dialog = function(dude, pigeon)
-        dude:sayLine("I'm not talking to myself.  No really I'm not.")
-        dude:sayLine("I come up here to get good reception.")
-	dude:sayLine("I got this new Bluetooth headset.") 	
-	dude:sayLine("Lately no one has been able to get through to me.") 
-	dude:sayLine("Maybe I could get calls down there...")
+        dude:sayLine("I got this new Bluetooth headset") 
+        dude:sayLine("But no one will call me. I feel so alone.") 
+        dude:sayLine("All of those people down there, and none of them want to call me.")
+        dude:sayLine("What's the point of living when no one wants to call you?")
         pigeon:sayLine("Coo...")
     end;
     scene = 'Scenes/BluetoothGuy.scene';
     responses = {
         ['Telephone Call'] = function(dude, pigeon)
-            dude:sayLine("I have to take this important call, but thanks.")
-   dude:success()
- end;
+            dude:sayLine("Oh . . .someone is calling me!")
+            dude:sayLine("I'm getting a phone call!")
+            dude:sayLine(". . .it's too windy up here, you'll have to excuse me!")
+            dude:sayLine("This call is very important!")
+            dude:success()
+        end;
         ['Newspaper Article'] = function(dude, pigeon)
-            dude:sayLine("I have nothing more to say.")
-   dude:failure()
- end;
+            dude:sayLine("What is this?")
+            dude:sayLine(". . .")
+            dude:sayLine(". . .oh dear.")
+            dude:sayLine("If my headset is going to give me brain cancer, I might as well give up now.")
+            dude:failure()
+        end;
     };
     nextDude = "Dudes/PeterGuy.dude"
 }

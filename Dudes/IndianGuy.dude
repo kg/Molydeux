@@ -1,27 +1,27 @@
 return {
-    name = 'Sad Indian Human';
+    name = 'Sad Human';
     sprite = 'Art/Game/businessman01_sad.png';
     spriteDead = 'Art/Game/businessman01_dead.png';
     scale = 0.2;
-    location = { 388, 790 };
-    pigeonDialogLocation = { 571, 555 };
+    location = { 1176, 1192 };
     dialog = function(dude, pigeon)
-        dude:sayLine("I moved to the states hoping to be a real American movie star. No one will hire me...")
-        dude:sayLine("They say I am not cool enough. I bet it is cooler down there...")
+        dude:sayLine("I moved to America hoping to be a real American movie star")
+        dude:sayLine("But no one will cast me in their movies.")
+        dude:sayLine("They say my style is too...'Bollywood'.")
+        dude:sayLine("If only I could convince them that I can fit in!")
         pigeon:sayLine("Coo...")
     end;
     scene = 'Scenes/IndianGuy.scene';
     responses = {
         ['Sunglasses'] = function(dude, pigeon)
-            dude:sayLine("My future is so bright I got to, you know the rest. Thanks!")
- dude:success()
- end;
-  	['Trunks'] = function(dude, pigeon)
-            dude:sayLine("I could go work on my tan.")
-  end;
-    ['Bikini'] = function(dude, pigeon)
-            dude:sayLine("If this is what I have to wear to be a star, forget it.")	
-   dude:failure()
+            dude:sayLine("Ah, of course! I must look the part of a movie star to be one!")
+            dude:sayLine("My future is so bright, I've gotta...")
+            dude:sayLine("...you know the rest. Thanks!")
+            dude:success()
+        end;
+        ['Bikini'] = function(dude, pigeon)
+            dude:sayLine("If this is what I have to wear to be a star, forget it.")
+            dude:failure()
         end;
     };
     nextDude = "Dudes/BluetoothGuy.dude"

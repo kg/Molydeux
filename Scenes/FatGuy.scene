@@ -27,7 +27,7 @@ return {
             name = 'Chinese Food';
             image = 'Art/Game/item_takeout.png';
             silhouetteImage = 'Art/Game/item_takeout_a.png';
-            location = {284, 444};
+            location = {720, 220};
             description = "Only 25 percent MSG by volume!";
             onClick = function (scene)
                 scene.running = false

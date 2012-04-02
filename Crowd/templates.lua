@@ -6,7 +6,7 @@ return {
     },
     {
         image = "Art/Game/crowdNorm02.png";
-        pointingImage = "Art/Game/crowdPoint01.png";
+        pointingImage = "Art/Game/crowdPoint02.png";
         scale = 0.15;
     }
 }

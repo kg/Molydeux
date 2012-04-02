@@ -1,29 +1,32 @@
 return {
-    name = 'Sad Asian Human';
+    name = 'Small Lonely Human';
     sprite = 'Art/Game/businessman04_sad.png';
     spriteDead = 'Art/Game/businessman04_dead.png';
     scale = 0.2;
-    location = { 2726, 855 };
-    pigeonDialogLocation = { 571, 555 };
+    location = { 2696, 852 };
     dialog = function(dude, pigeon)
         dude:sayLine("She could cook.  She could clean.  But most importantly she was there for me.")
+        dude:sayLine("Now she's gone, and I'm alone.")
         dude:sayLine("Look at all the people down on the sidewalk...")
-	dude:sayLine("I bet if I jumped down to them, they would all crowd around me and I would not be lonely.")
+        dude:sayLine("I bet if I jumped down there, they would all crowd around me and I wouldn't be lonely anymore.")
         pigeon:sayLine("Coo...")
     end;
     scene = 'Scenes/AsianGuy.scene';
     responses = {
         ['Wife Picture'] = function(dude, pigeon)
-            dude:sayLine("No one will ever be there for me like she was.")	
-   dude:failure()
- end;
-  	['Toupee'] = function(dude, pigeon)
-            dude:sayLine("I think I'm turning Japanese I think I'm turning Japanese I need to get some.")	
- dude:success()
- end;
-	[' Karate DVD'] = function(dude, pigeon)
-            dude:sayLine("I've always wanted to do karate.  There is this cute girl who teaches it in the area.  I'm going to go say hi.")
-            dude:sucess()
+            dude:sayLine("Oh, look at the two of us together…so happy, So joyful.")
+            dude:sayLine("I'll never be happy again. Farewell!")
+            dude:failure()
+        end;
+        ['Toupee'] = function(dude, pigeon)
+            dude:sayLine("Oh my, look at me! I feel like a new man!")
+            dude:sayLine("Perhaps there is still hope for finding happiness!")
+            dude:success()
+        end;
+        ['Karate DVD'] = function(dude, pigeon)
+            dude:sayLine("Oh, what a fantastic film.")
+            dude:sayLine("If Chow Yun-Fat doesn't need hair to be cool, neither do I! I need to get back in the game!")
+            dude:success()
         end;
     };
     nextDude = "Dudes/IndianGuy.dude"
