@@ -18,6 +18,8 @@ local Outside = {
 Outside.__index = Outside
 Outside.WORLD_WIDTH  = 3840
 Outside.WORLD_HEIGHT = 1080
+Outside.saved = 0
+Outside.lost = 0
 
 function Outside.new(dudeFile)
     local Ob = {}
@@ -148,6 +150,11 @@ function Outside:setDude(dudeFile)
         self.behindLayer:removeProp(self.dude.prop)
         self.spriteLayer:removeProp(self.dude.prop)
         self.dude = nil
+    end
+    
+    -- Check for unlocking Peter
+    if not dudeFile and self.saved == 4 then
+        dudeFile = 'Dudes/PeterGuy.dude'
     end
     
     if dudeFile then

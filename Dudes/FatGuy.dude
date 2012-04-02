@@ -6,7 +6,7 @@ return {
     location = { 840, 1028 };
     dialog = function(dude, pigeon)
         dude:sayLine("I've eaten the best food this city has to offer.")
-        dude:sayLine("I find no longer find joy in eating, and thus find no joy in life.")
+        dude:sayLine("I no longer find joy in eating, and thus find no joy in life.")
         dude:sayLine("What is the point of living if there is nothing new and exciting to eat?")
         pigeon:sayLine("Coo...")
     end;
