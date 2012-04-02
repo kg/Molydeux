@@ -15,7 +15,7 @@ return {
         },
         {
             name = 'Bikini';
-            description = 'Perfect for catching some rays on the beach.';
+            description = 'Perfect for catching some rays on the beach - and a few looks.';
             image = 'Art/Game/item_bikini.png';
             silhouetteImage = 'Art/Game/item_bikini_a.png';
             location = {394, 250};

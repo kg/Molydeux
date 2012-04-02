@@ -15,7 +15,7 @@ return {
         },
         {
             name = 'Toupee';
-            description = "I'm not only the president - I'm a pigeon!";
+            description = "A toupee. I'm not only the president - I'm a pigeon!";
             image = 'Art/Game/item_toupee.png';
             silhouetteImage = 'Art/Game/item_toupee_a.png';
             location = {540, 600};
@@ -25,7 +25,7 @@ return {
         },
         {
             name = 'Karate DVD';
-            description = 'You too can have the strength of a tiger in 36 easy steps!';
+            description = 'A DVD of a kung-fu film. You too can have the strength of a tiger in 36 easy steps!';
             image = 'Art/Game/item_dvd.png';
             silhouetteImage = 'Art/Game/item_dvd_a.png';
             location = {400, 344};
