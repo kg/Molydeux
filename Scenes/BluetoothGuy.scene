@@ -15,7 +15,7 @@ return {
         },
         {
             name = 'Newspaper Article';
-            description = 'A new study reveals an unprecedented causal link between exposure to pigeons and cancer.';
+            description = 'A new study reveals an unprecedented causal link between exposure to bluetooth radios, pigeons and cancer.';
             image = 'Art/Game/item_article.png';
             silhouetteImage = 'Art/Game/item_article_a.png';
             location = {660, 106};
