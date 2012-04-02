@@ -14,7 +14,7 @@ return {
             end
         },
  {
-            name = 'item_pixel';
+            name = 'Pixel';
             description = 'A pixel like all the others...';
             image = 'Art/Game/item_pixel.png';
             silhouetteImage = 'Art/Game/item_pixel_a.png';
