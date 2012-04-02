@@ -109,6 +109,8 @@ function CrowdManager:update()
         cm:update(now)
     end
     
+    table.sort(killList, function(a,b) return a>b end)
+    
     for i, killIndex in ipairs(killList) do
         self:killCrowdMemberAtIndex(killIndex)
     end

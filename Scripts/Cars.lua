@@ -49,9 +49,9 @@ function CarManager:spawnCar(now)
 end
 
 function CarManager:killCarAtIndex(index)
-    local cm = self.cars[index]
+    local car = self.cars[index]
     table.remove(self.cars, index)
-    self.layer:removeProp(cm.prop)
+    self.layer:removeProp(car.prop)
 end
 
 function CarManager:update()
@@ -70,6 +70,8 @@ function CarManager:update()
             table.insert(killList, i)
         end
     end
+    
+    table.sort(killList, function(a,b) return a>b end)
     
     for i, killIndex in ipairs(killList) do
         self:killCarAtIndex(killIndex)

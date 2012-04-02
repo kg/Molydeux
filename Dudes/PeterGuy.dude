@@ -2,8 +2,8 @@ return {
     name = 'Distraught Developer Human';
     sprite = 'Art/Game/businessman05_sad.png';
     scale = 0.2;
-    location = { 1716, 732 };
-    scene = 'Scenes/BluetoothGuy.scene';
+    location = { 1684, 670 };
+    scene = 'Scenes/PeterGuy.scene';
     dialog = function(dude, pigeon)
         dude:sayLine("In its beginning, the game industry was one of great creativity and innovation.")
         dude:sayLine("Art and technology were used to create such wonderful experiences")
@@ -18,6 +18,9 @@ return {
             dude:sayLine("It's time to start thinking outside of the box.")
             dude:success()
         end;
+	['Pixel'] = function(dude, pigeon)
+            dude:sayLine("This is nice...")
+		dude:sayLine("But I've seen so many like it before.")
     };
     nextDude = nil
 }

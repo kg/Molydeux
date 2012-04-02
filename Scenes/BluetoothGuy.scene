@@ -5,7 +5,7 @@ return {
         
         {
             name = 'Telephone Call';
-            description = 'A scrap of paper with a telephone number written on it. I wonder whose it is?';
+            description = 'A cell phone with one person programmed into the address book.';
             image = 'Art/Game/item_cellphone.png';
             silhouetteImage = 'Art/Game/item_cellphone_a.png';
             location = {286, 422};
@@ -15,7 +15,7 @@ return {
         },
         {
             name = 'Newspaper Article';
-            description = 'A new study reveals an unprecedented causal link between exposure to pigeons and cancer.';
+            description = 'A new study reveals an unprecedented causal link between exposure to bluetooth radios, pigeons and cancer.';
             image = 'Art/Game/item_article.png';
             silhouetteImage = 'Art/Game/item_article_a.png';
             location = {660, 106};

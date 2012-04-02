@@ -3,8 +3,7 @@ return {
     sprite = 'Art/Game/businessman03_sad.png';
     spriteDead = 'Art/Game/businessman03_dead.png';
     scale = 0.2;
-    location = { 3560, 668 };
-    pigeonDialogLocation = { 3508, 576 };
+    location = { 3560, 700 };
     dialog = function(dude, pigeon)
         dude:sayLine("I got this new Bluetooth headset") 
         dude:sayLine("But no one will call me. I feel so alone.") 
@@ -29,5 +28,5 @@ return {
             dude:failure()
         end;
     };
-    nextDude = "Dudes/PeterGuy.dude"
+    nextDude = nil
 }

@@ -14,7 +14,7 @@ return {
     scene = 'Scenes/AsianGuy.scene';
     responses = {
         ['Wife Picture'] = function(dude, pigeon)
-            dude:sayLine("Oh, look at the two of us together…so happy, So joyful.")
+            dude:sayLine("Oh, look at the two of us together ... so happy, So joyful.")
             dude:sayLine("I'll never be happy again. Farewell!")
             dude:failure()
         end;
