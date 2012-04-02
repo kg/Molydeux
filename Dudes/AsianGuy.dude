@@ -8,20 +8,20 @@ return {
     dialog = function(dude, pigeon)
         dude:sayLine("She could cook.  She could clean.  But most importantly she was there for me.")
         dude:sayLine("Look at all the people down on the sidewalk...")
-	dude:sayLine("I bet if I jumped down to them, they would all crowd around me and I would not be lonely.")
+        dude:sayLine("I bet if I jumped down to them, they would all crowd around me and I would not be lonely.")
         pigeon:sayLine("Coo...")
     end;
     scene = 'Scenes/AsianGuy.scene';
     responses = {
         ['Wife Picture'] = function(dude, pigeon)
             dude:sayLine("No one will ever be there for me like she was.")	
-   dude:failure()
- end;
-  	['Toupee'] = function(dude, pigeon)
+            dude:failure()
+        end;
+        ['Toupee'] = function(dude, pigeon)
             dude:sayLine("I think I'm turning Japanese I think I'm turning Japanese I need to get some.")	
- dude:success()
- end;
-	[' Karate DVD'] = function(dude, pigeon)
+            dude:success()
+        end;
+        ['Karate DVD'] = function(dude, pigeon)
             dude:sayLine("I've always wanted to do karate.  There is this cute girl who teaches it in the area.  I'm going to go say hi.")
             dude:sucess()
         end;
